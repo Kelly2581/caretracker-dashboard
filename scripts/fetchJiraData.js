@@ -23,85 +23,58 @@ async function jiraFetch(endpoint) {
   });
 
   if (!response.ok) {
-    throw new Error(`Jira API error: ${response.status} ${response.statusText}`);
+    const text = await response.text();
+    throw new Error(`Jira API error ${response.status}: ${text}`);
   }
 
   return response.json();
 }
 
 async function fetchProjectData(projectKey) {
-  console.log(`Fetching data for ${projectKey}...`);
-
-  const jql = `project = "${projectKey}" AND updated >= -30d`;
-  const issues = await jiraFetch(`/search?jql=${encodeURIComponent(jql)}&maxResults=500&expand=changelog`);
-
-  // Calculate metrics
-  const stats = {
-    total: issues.total,
-    issues: issues.issues || [],
-    byStatus: {},
-    byType: {},
-    byPriority: {},
-    created: 0,
-    resolved: 0,
-    defects: 0,
-    features: 0
-  };
-
-  (issues.issues || []).forEach(issue => {
-    const status = issue.fields.status?.name || 'Unknown';
-    const type = issue.fields.issuetype?.name || 'Unknown';
-    const priority = issue.fields.priority?.name || 'Unknown';
-
-    // Count by status
-    stats.byStatus[status] = (stats.byStatus[status] || 0) + 1;
-    stats.byType[type] = (stats.byType[type] || 0) + 1;
-    stats.byPriority[priority] = (stats.byPriority[priority] || 0) + 1;
-
-    // Count defects and features
-    if (type === 'Bug') stats.defects++;
-    if (['Story', 'Task', 'Spike'].includes(type)) stats.features++;
-
-    // Count created and resolved
-    if (status === 'Done' || status === 'Closed') stats.resolved++;
-    if (issue.fields.created) stats.created++;
-  });
-
-  return stats;
-}
-
-async function fetchBoardData(boardId, projectKey) {
-  console.log(`Fetching board ${boardId} data for ${projectKey}...`);
-
   try {
-    const board = await jiraFetch(`/board/${boardId}`);
-    const sprints = await jiraFetch(`/board/${boardId}/sprint?maxResults=50`);
+    console.log(`Fetching data for ${projectKey}...`);
 
-    // Get current sprint
-    const activeSprints = (sprints.values || []).filter(s => s.state === 'active');
-    let sprintData = null;
+    const jql = `project = "${projectKey}" AND updated >= -30d`;
+    const data = await jiraFetch(`/search/jql?jql=${encodeURIComponent(jql)}&maxResults=500`);
 
-    if (activeSprints.length > 0) {
-      const sprintId = activeSprints[0].id;
-      const sprintIssues = await jiraFetch(`/sprint/${sprintId}/issue?maxResults=500`);
+    console.log(`Got ${data.total} issues from ${projectKey}`);
 
-      sprintData = {
-        name: activeSprints[0].name,
-        state: activeSprints[0].state,
-        issueCount: sprintIssues.total || 0,
-        issues: sprintIssues.issues || []
-      };
-    }
-
-    return {
-      boardId,
-      boardName: board.name,
-      projectKey,
-      sprintData
+    const stats = {
+      total: data.total || 0,
+      issues: data.issues || [],
+      byStatus: {},
+      byType: {},
+      byPriority: {},
+      created: 0,
+      resolved: 0,
+      defects: 0,
+      features: 0
     };
+
+    (data.issues || []).forEach(issue => {
+      try {
+        const status = issue.fields?.status?.name || 'Unknown';
+        const type = issue.fields?.issuetype?.name || 'Unknown';
+        const priority = issue.fields?.priority?.name || 'Unknown';
+
+        stats.byStatus[status] = (stats.byStatus[status] || 0) + 1;
+        stats.byType[type] = (stats.byType[type] || 0) + 1;
+        stats.byPriority[priority] = (stats.byPriority[priority] || 0) + 1;
+
+        if (type === 'Bug') stats.defects++;
+        if (['Story', 'Task', 'Spike'].includes(type)) stats.features++;
+
+        if (status === 'Done' || status === 'Closed') stats.resolved++;
+        if (issue.fields?.created) stats.created++;
+      } catch (err) {
+        console.warn(`Error processing issue ${issue.key}:`, err.message);
+      }
+    });
+
+    return stats;
   } catch (err) {
-    console.error(`Error fetching board ${boardId}:`, err.message);
-    return { boardId, error: err.message };
+    console.error(`Error fetching ${projectKey}:`, err.message);
+    throw err;
   }
 }
 
@@ -120,10 +93,6 @@ async function main() {
       data.projects[project.key] = await fetchProjectData(project.key);
     }
 
-    // Fetch board data for AMP
-    data.ampBoard = await fetchBoardData(75, 'AMP');
-
-    // Save to JSON
     const dataDir = path.join(process.cwd(), 'public');
     if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
 
@@ -132,7 +101,7 @@ async function main() {
       JSON.stringify(data, null, 2)
     );
 
-    console.log('Data saved to public/jira-data.json');
+    console.log('✓ Data saved to public/jira-data.json');
     console.log(JSON.stringify(data, null, 2));
 
   } catch (error) {
