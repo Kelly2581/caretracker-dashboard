@@ -1,9 +1,87 @@
 {
-  "timestamp": "2026-09-15T15:19:09.612Z",
+  "timestamp": "2026-09-15T17:02:22.341Z",
   "projects": {
     "CT": {
       "total": 100,
       "issues": [
+        {
+          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+          "id": "36893",
+          "self": "https://caretracker.atlassian.net/rest/api/3/issue/36893",
+          "key": "CT-6592",
+          "fields": {
+            "issuetype": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10011",
+              "id": "10011",
+              "description": "A problem or error.",
+              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium",
+              "name": "Bug",
+              "subtask": false,
+              "avatarId": 10303,
+              "hierarchyLevel": 0
+            },
+            "priority": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
+              "name": "Medium",
+              "id": "3"
+            },
+            "created": "2026-09-15T12:48:58.258-0400",
+            "status": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10004",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
+              "name": "Dev Ready",
+              "id": "10004",
+              "statusCategory": {
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/4",
+                "id": 4,
+                "key": "indeterminate",
+                "colorName": "yellow",
+                "name": "In Progress"
+              }
+            }
+          }
+        },
+        {
+          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+          "id": "36886",
+          "self": "https://caretracker.atlassian.net/rest/api/3/issue/36886",
+          "key": "CT-6591",
+          "fields": {
+            "issuetype": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10021",
+              "id": "10021",
+              "description": "Used to create Package Database items as this has a different workflow than a non-package database change.",
+              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10300?size=medium",
+              "name": "DB Package Change",
+              "subtask": false,
+              "avatarId": 10300,
+              "hierarchyLevel": 0
+            },
+            "priority": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
+              "name": "Medium",
+              "id": "3"
+            },
+            "created": "2026-09-15T11:50:12.518-0400",
+            "status": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10005",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
+              "name": "Development",
+              "id": "10005",
+              "statusCategory": {
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/4",
+                "id": 4,
+                "key": "indeterminate",
+                "colorName": "yellow",
+                "name": "In Progress"
+              }
+            }
+          }
+        },
         {
           "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
           "id": "36883",
@@ -28,11 +106,11 @@
             },
             "created": "2026-09-15T10:43:46.334-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10004",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10005",
               "description": "",
               "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
-              "name": "Dev Ready",
-              "id": "10004",
+              "name": "Development",
+              "id": "10005",
               "statusCategory": {
                 "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/4",
                 "id": 4,
@@ -3610,17 +3688,17 @@
             },
             "created": "2026-09-04T16:37:18.191-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10004",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/1",
               "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
-              "name": "Dev Ready",
-              "id": "10004",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/open.png",
+              "name": "Open",
+              "id": "1",
               "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/4",
-                "id": 4,
-                "key": "indeterminate",
-                "colorName": "yellow",
-                "name": "In Progress"
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/2",
+                "id": 2,
+                "key": "new",
+                "colorName": "blue-gray",
+                "name": "To Do"
               }
             }
           }
@@ -3819,21 +3897,71 @@
               }
             }
           }
+        }
+      ],
+      "byStatus": {
+        "Dev Ready": 29,
+        "Development": 9,
+        "Open": 4,
+        "Closed": 29,
+        "Sizing": 1,
+        "Story Development": 26,
+        "Deployed to Dev": 1,
+        "Deployed to QA": 1
+      },
+      "byType": {
+        "Bug": 9,
+        "DB Package Change": 5,
+        "Story": 34,
+        "Spike": 5,
+        "Data Defect": 4,
+        "Task": 40,
+        "Epic": 1,
+        "Custom Report": 1,
+        "DB Non-Package Change": 1
+      },
+      "byPriority": {
+        "Medium": 98,
+        "Lowest": 1,
+        "Unknown": 1
+      },
+      "bySprintCommitment": {},
+      "bySprint": {},
+      "created": 100,
+      "resolved": 29,
+      "defects": 9,
+      "features": 79,
+      "bugsCreated": 9,
+      "bugsResolved": 6,
+      "agingByPhase": {
+        "Dev Ready": {
+          "count": 29,
+          "average": 4
         },
+        "Development": {
+          "count": 9,
+          "average": 5
+        }
+      },
+      "cycleTimeP85": 0
+    },
+    "AMP": {
+      "total": 72,
+      "issues": [
         {
           "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
-          "id": "36715",
-          "self": "https://caretracker.atlassian.net/rest/api/3/issue/36715",
-          "key": "CT-6460",
+          "id": "36881",
+          "self": "https://caretracker.atlassian.net/rest/api/3/issue/36881",
+          "key": "AMP-120",
           "fields": {
             "issuetype": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10015",
-              "id": "10015",
-              "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
-              "name": "Task",
+              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10011",
+              "id": "10011",
+              "description": "A problem or error.",
+              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium",
+              "name": "Bug",
               "subtask": false,
-              "avatarId": 10318,
+              "avatarId": 10303,
               "hierarchyLevel": 0
             },
             "priority": {
@@ -3842,46 +3970,7 @@
               "name": "Medium",
               "id": "3"
             },
-            "created": "2026-09-04T09:59:13.960-0400",
-            "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10004",
-              "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
-              "name": "Dev Ready",
-              "id": "10004",
-              "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/4",
-                "id": 4,
-                "key": "indeterminate",
-                "colorName": "yellow",
-                "name": "In Progress"
-              }
-            }
-          }
-        },
-        {
-          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
-          "id": "36714",
-          "self": "https://caretracker.atlassian.net/rest/api/3/issue/36714",
-          "key": "CT-6459",
-          "fields": {
-            "issuetype": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10021",
-              "id": "10021",
-              "description": "Used to create Package Database items as this has a different workflow than a non-package database change.",
-              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10300?size=medium",
-              "name": "DB Package Change",
-              "subtask": false,
-              "avatarId": 10300,
-              "hierarchyLevel": 0
-            },
-            "priority": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
-              "name": "Medium",
-              "id": "3"
-            },
-            "created": "2026-09-04T09:57:44.508-0400",
+            "created": "2026-09-15T09:09:09.079-0400",
             "status": {
               "self": "https://caretracker.atlassian.net/rest/api/3/status/6",
               "description": "",
@@ -3897,42 +3986,7 @@
               }
             }
           }
-        }
-      ],
-      "byStatus": {
-        "Dev Ready": 31,
-        "Development": 7,
-        "Open": 3,
-        "Closed": 30,
-        "Sizing": 1,
-        "Story Development": 26,
-        "Deployed to Dev": 1,
-        "Deployed to QA": 1
-      },
-      "byType": {
-        "Bug": 8,
-        "Story": 34,
-        "Spike": 5,
-        "Data Defect": 4,
-        "Task": 41,
-        "Epic": 1,
-        "DB Package Change": 5,
-        "Custom Report": 1,
-        "DB Non-Package Change": 1
-      },
-      "byPriority": {
-        "Medium": 98,
-        "Lowest": 1,
-        "Unknown": 1
-      },
-      "created": 100,
-      "resolved": 30,
-      "defects": 8,
-      "features": 80
-    },
-    "AMP": {
-      "total": 71,
-      "issues": [
+        },
         {
           "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
           "id": "36823",
@@ -6704,27 +6758,45 @@
         }
       ],
       "byStatus": {
-        "Closed": 66,
+        "Closed": 67,
         "Release Ready": 3,
         "Open": 1,
         "On Hold": 1
       },
       "byType": {
-        "Bug": 45,
+        "Bug": 46,
         "Task": 7,
         "Story": 17,
         "Spike": 2
       },
       "byPriority": {
-        "Medium": 64,
+        "Medium": 65,
         "High": 5,
         "Low": 1,
         "Lowest": 1
       },
-      "created": 71,
-      "resolved": 66,
-      "defects": 45,
-      "features": 26
+      "bySprintCommitment": {},
+      "bySprint": {},
+      "created": 72,
+      "resolved": 67,
+      "defects": 46,
+      "features": 26,
+      "bugsCreated": 46,
+      "bugsResolved": 43,
+      "agingByPhase": {},
+      "cycleTimeP85": 0
+    }
+  },
+  "epics": {
+    "CT": {
+      "total": 100,
+      "blankProposedDate": 100,
+      "blankActualDate": 100
+    },
+    "AMP": {
+      "total": 3,
+      "blankProposedDate": 3,
+      "blankActualDate": 3
     }
   }
 }

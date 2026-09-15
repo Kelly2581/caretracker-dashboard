@@ -11,6 +11,8 @@ const projects = [
   { key: 'AMP', name: 'Amplify' }
 ];
 
+const excludedAssignees = ['Remya', 'Lanying', 'Aqsa', 'Benjamin', 'Shrikar', 'John Hobby'];
+
 const auth = Buffer.from(`${JIRA_EMAIL}:${JIRA_API_TOKEN}`).toString('base64');
 
 async function jiraFetch(endpoint) {
@@ -37,7 +39,7 @@ async function fetchProjectData(projectKey) {
     const excludedAssignees = ['Remya', 'Lanying', 'Aqsa', 'Benjamin', 'Shrikar', 'John Hobby'];
     const assigneeFilter = excludedAssignees.map(name => `assignee != "${name}"`).join(' AND ');
     const jql = `project = "${projectKey}" AND updated >= -30d AND ${assigneeFilter}`;
-    const data = await jiraFetch(`/search/jql?jql=${encodeURIComponent(jql)}&maxResults=500&fields=status,issuetype,priority,created`);
+    const data = await jiraFetch(`/search/jql?jql=${encodeURIComponent(jql)}&maxResults=500&fields=status,issuetype,priority,created,sprint,epic,changelog`);
 
     const issuesList = data.issues || [];
     console.log(`Got ${issuesList.length} issues from ${projectKey}`);
@@ -48,10 +50,16 @@ async function fetchProjectData(projectKey) {
       byStatus: {},
       byType: {},
       byPriority: {},
+      bySprintCommitment: {},
+      bySprint: {},
       created: 0,
       resolved: 0,
       defects: 0,
-      features: 0
+      features: 0,
+      bugsCreated: 0,
+      bugsResolved: 0,
+      cycleTimesDevToRelease: [],
+      agingByPhase: {}
     };
 
     issuesList.forEach(issue => {
@@ -59,25 +67,130 @@ async function fetchProjectData(projectKey) {
         const status = issue.fields?.status?.name || 'Unknown';
         const type = issue.fields?.issuetype?.name || 'Unknown';
         const priority = issue.fields?.priority?.name || 'Unknown';
+        const sprints = issue.fields?.sprint || [];
+        const sprintName = sprints && sprints.length > 0 ? sprints[0].name : 'No Sprint';
+        const createdDate = issue.fields?.created ? new Date(issue.fields.created) : null;
 
+        // Basic counts
         stats.byStatus[status] = (stats.byStatus[status] || 0) + 1;
         stats.byType[type] = (stats.byType[type] || 0) + 1;
         stats.byPriority[priority] = (stats.byPriority[priority] || 0) + 1;
 
+        // Sprint tracking
+        if (sprintName !== 'No Sprint') {
+          stats.bySprint[sprintName] = (stats.bySprint[sprintName] || 0) + 1;
+          if (status === 'Done' || status === 'Closed') {
+            stats.bySprintCommitment[sprintName] = (stats.bySprintCommitment[sprintName] || 0) + 1;
+          }
+        }
+
+        // Type counts
         if (type === 'Bug') stats.defects++;
         if (['Story', 'Task', 'Spike'].includes(type)) stats.features++;
 
+        // Status counts
         if (status === 'Done' || status === 'Closed') stats.resolved++;
         if (issue.fields?.created) stats.created++;
+
+        // Bug tracking
+        if (type === 'Bug') {
+          stats.bugsCreated++;
+          if (status === 'Done' || status === 'Closed') stats.bugsResolved++;
+        }
+
+        // Cycle time calculation (Dev Ready to Release Ready)
+        if (status === 'Release Ready') {
+          const changelog = issue.changelog?.histories || [];
+          let devReadyDate = null;
+
+          for (const history of changelog) {
+            for (const item of history.items || []) {
+              if (item.field === 'status' && item.toString === 'Dev Ready') {
+                devReadyDate = new Date(history.created);
+              }
+            }
+          }
+
+          if (devReadyDate && createdDate) {
+            const cycleTime = (new Date(status === 'Release Ready' ? status : createdDate) - devReadyDate) / (1000 * 60 * 60 * 24);
+            if (cycleTime > 0) stats.cycleTimesDevToRelease.push(cycleTime);
+          }
+        }
+
+        // Aging by phase
+        const phaseMap = {
+          'Development': 'Development',
+          'Dev Ready': 'Dev Ready',
+          'Testing': 'Testing',
+          'Product Acceptance': 'Product Acceptance'
+        };
+
+        if (phaseMap[status] && !(['Done', 'Closed'].includes(status))) {
+          if (!stats.agingByPhase[status]) {
+            stats.agingByPhase[status] = { days: [], count: 0 };
+          }
+          const daysOpen = createdDate ? (Date.now() - createdDate) / (1000 * 60 * 60 * 24) : 0;
+          stats.agingByPhase[status].days.push(daysOpen);
+          stats.agingByPhase[status].count++;
+        }
+
       } catch (err) {
         console.warn(`Error processing issue ${issue.key}:`, err.message);
       }
     });
 
+    // Calculate averages for aging
+    for (const phase in stats.agingByPhase) {
+      const days = stats.agingByPhase[phase].days;
+      stats.agingByPhase[phase].average = days.length > 0 ? Math.round(days.reduce((a, b) => a + b) / days.length) : 0;
+      delete stats.agingByPhase[phase].days;
+    }
+
+    // Calculate p85 cycle time
+    if (stats.cycleTimesDevToRelease.length > 0) {
+      stats.cycleTimesDevToRelease.sort((a, b) => a - b);
+      const p85Index = Math.ceil(stats.cycleTimesDevToRelease.length * 0.85) - 1;
+      stats.cycleTimeP85 = stats.cycleTimesDevToRelease[Math.max(0, p85Index)];
+    } else {
+      stats.cycleTimeP85 = 0;
+    }
+
+    delete stats.cycleTimesDevToRelease;
+
     return stats;
   } catch (err) {
     console.error(`Error fetching ${projectKey}:`, err.message);
     throw err;
+  }
+}
+
+async function fetchEpicData(projectKey) {
+  try {
+    console.log(`Fetching epic data for ${projectKey}...`);
+
+    const jql = `project = "${projectKey}" AND type = Epic`;
+    const data = await jiraFetch(`/search/jql?jql=${encodeURIComponent(jql)}&maxResults=500&fields=customfield_10010,customfield_10011`);
+
+    const epics = data.issues || [];
+    let blankReleaseDate = 0;
+    let blankActualDate = 0;
+
+    epics.forEach(epic => {
+      const proposedRelease = epic.fields?.customfield_10010; // Proposed Release Date custom field
+      const actualRelease = epic.fields?.customfield_10011; // Actual Release Date custom field
+
+      if (!proposedRelease) blankReleaseDate++;
+      if (!actualRelease) blankActualDate++;
+    });
+
+    return {
+      total: epics.length,
+      blankProposedDate: blankReleaseDate,
+      blankActualDate: blankActualDate
+    };
+  } catch (err) {
+    console.error(`Error fetching epic data for ${projectKey}:`, err.message);
+    return { total: 0, blankProposedDate: 0, blankActualDate: 0 };
   }
 }
 
@@ -89,11 +202,13 @@ async function main() {
 
     const data = {
       timestamp: new Date().toISOString(),
-      projects: {}
+      projects: {},
+      epics: {}
     };
 
     for (const project of projects) {
       data.projects[project.key] = await fetchProjectData(project.key);
+      data.epics[project.key] = await fetchEpicData(project.key);
     }
 
     const dataDir = path.join(process.cwd(), 'public');
@@ -105,7 +220,6 @@ async function main() {
     );
 
     console.log('✓ Data saved to public/jira-data.json');
-    console.log(JSON.stringify(data, null, 2));
 
   } catch (error) {
     console.error('Error:', error.message);
