@@ -52,6 +52,9 @@ async function fetchProjectData(projectKey) {
       byPriority: {},
       bySprintCommitment: {},
       bySprint: {},
+      bySprintBugs: {},
+      bySprintCapacity: {},
+      sprints: [],
       created: 0,
       resolved: 0,
       defects: 0,
@@ -96,6 +99,30 @@ async function fetchProjectData(projectKey) {
         if (type === 'Bug') {
           stats.bugsCreated++;
           if (status === 'Done' || status === 'Closed') stats.bugsResolved++;
+
+          // Bug tracking by sprint
+          if (sprintName !== 'No Sprint') {
+            if (!stats.bySprintBugs[sprintName]) {
+              stats.bySprintBugs[sprintName] = { created: 0, resolved: 0 };
+            }
+            stats.bySprintBugs[sprintName].created++;
+            if (status === 'Done' || status === 'Closed') {
+              stats.bySprintBugs[sprintName].resolved++;
+            }
+          }
+        }
+
+        // Capacity mix by sprint
+        if (sprintName !== 'No Sprint') {
+          if (!stats.bySprintCapacity[sprintName]) {
+            stats.bySprintCapacity[sprintName] = { features: 0, maintenance: 0, total: 0 };
+          }
+          stats.bySprintCapacity[sprintName].total++;
+          if (['Story', 'Task', 'Spike'].includes(type)) {
+            stats.bySprintCapacity[sprintName].features++;
+          } else if (type === 'Bug' || type === 'Tech Debt') {
+            stats.bySprintCapacity[sprintName].maintenance++;
+          }
         }
 
         // Cycle time calculation (Dev Ready to Release Ready)
@@ -156,6 +183,9 @@ async function fetchProjectData(projectKey) {
     }
 
     delete stats.cycleTimesDevToRelease;
+
+    // Build sprint list
+    stats.sprints = Object.keys(stats.bySprint).sort();
 
     return stats;
   } catch (err) {

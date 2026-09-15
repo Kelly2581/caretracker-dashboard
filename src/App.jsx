@@ -1,6 +1,14 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
+const SVGNS = "http://www.w3.org/2000/svg";
+const el = (tag, attrs = {}, text) => {
+  const n = document.createElementNS(SVGNS, tag);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  if (text != null) n.textContent = text;
+  return n;
+};
+
 export default function App() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -25,8 +33,6 @@ export default function App() {
 
   const ct = data.projects.CT || {};
   const amp = data.projects.AMP || {};
-  const ctEpics = data.epics.CT || {};
-  const ampEpics = data.epics.AMP || {};
 
   const calculateRate = (resolved, total) => total > 0 ? Math.round((resolved / total) * 100) : 0;
   const calculateDefectRate = (defects, total) => total > 0 ? Math.round((defects / total) * 100) : 0;
@@ -114,6 +120,172 @@ export default function App() {
 
   const lastUpdate = new Date(data.timestamp).toLocaleDateString();
 
+  // Chart components
+  const ChartCard = ({ title, sub, children }) => (
+    <div className="card">
+      <header>
+        <div>
+          <h3>{title}</h3>
+          <div className="sub">{sub}</div>
+        </div>
+      </header>
+      {children}
+    </div>
+  );
+
+  const commitmentChart = () => {
+    if (!ct.sprints || ct.sprints.length === 0) {
+      return <div className="plot"><p style={{ padding: '20px', color: 'var(--ink-muted)' }}>Sprint data not yet available</p></div>;
+    }
+
+    const W = 560, H = 232, M = { t: 14, r: 20, b: 30, l: 34 };
+    const iw = W - M.l - M.r, ih = H - M.t - M.b;
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img" });
+
+    const data = ct.sprints.map(s => {
+      const total = ct.bySprint[s] || 0;
+      const resolved = ct.bySprintCommitment[s] || 0;
+      return total > 0 ? Math.round((resolved / total) * 100) : 0;
+    });
+
+    const y = v => M.t + ih - (v / 110) * ih;
+    const x = i => M.l + (data.length === 1 ? iw / 2 : (i / (data.length - 1)) * iw);
+
+    // Grid lines
+    for (const v of [0, 25, 50, 75, 100]) {
+      svg.appendChild(el("line", { class: v === 0 ? "baseln" : "gridln", x1: M.l, x2: W - M.r, y1: y(v), y2: y(v) }));
+      svg.appendChild(el("text", { class: "ax", x: M.l - 8, y: y(v) + 4, "text-anchor": "end" }, v));
+    }
+
+    // Target line
+    svg.appendChild(el("line", { class: "tgtln", x1: M.l, x2: W - M.r, y1: y(85), y2: y(85) }));
+    svg.appendChild(el("text", { class: "ax-b", x: W - M.r, y: y(85) - 6, "text-anchor": "end" }, "target 85%"));
+
+    // Line path
+    svg.appendChild(el("path", {
+      d: data.map((v, i) => `${i ? "L" : "M"}${x(i)},${y(v)}`).join(" "),
+      fill: "none", stroke: "var(--s1)", "stroke-width": 2, "stroke-linejoin": "round", "stroke-linecap": "round"
+    }));
+
+    // Points and labels
+    data.forEach((v, i) => {
+      svg.appendChild(el("circle", { cx: x(i), cy: y(v), r: 3.5, fill: "var(--s1)", stroke: "var(--surface)", "stroke-width": 2 }));
+      svg.appendChild(el("text", { class: "ax", x: x(i), y: H - 10, "text-anchor": "middle" }, ct.sprints[i]));
+    });
+
+    return <div className="plot"><svg dangerouslySetInnerHTML={{ __html: svg.outerHTML }} style={{ width: '100%', height: 'auto' }} /></div>;
+  };
+
+  const capacityChart = () => {
+    if (!ct.sprints || ct.sprints.length === 0) {
+      return <div className="plot"><p style={{ padding: '20px', color: 'var(--ink-muted)' }}>Sprint data not yet available</p></div>;
+    }
+
+    const W = 560, H = 232, M = { t: 14, r: 20, b: 30, l: 34 };
+    const iw = W - M.l - M.r, ih = H - M.t - M.b;
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img" });
+
+    const y = v => M.t + ih - (v / 100) * ih;
+    const step = iw / ct.sprints.length;
+    const bw = Math.min(46, step * 0.56);
+
+    // Grid
+    for (const v of [0, 25, 50, 75, 100]) {
+      svg.appendChild(el("line", { class: v === 0 ? "baseln" : "gridln", x1: M.l, x2: W - M.r, y1: y(v), y2: y(v) }));
+      svg.appendChild(el("text", { class: "ax", x: M.l - 8, y: y(v) + 4, "text-anchor": "end" }, v));
+    }
+
+    // Bars
+    ct.sprints.forEach((sprint, i) => {
+      const capacity = ct.bySprintCapacity[sprint] || { features: 0, maintenance: 0, total: 0 };
+      const featurePct = capacity.total > 0 ? (capacity.features / capacity.total) * 100 : 0;
+
+      const cx = M.l + step * i + step / 2;
+      const x0 = cx - bw / 2;
+      const m = 100 - featurePct;
+
+      const yF = y(featurePct), hF = y(0) - yF;
+      const yM = y(100), hM = y(featurePct) - y(100) - 2;
+
+      svg.appendChild(el("rect", { x: x0, y: yM, width: bw, height: Math.max(hM, 0), fill: "var(--s2)", rx: 3 }));
+      svg.appendChild(el("rect", { x: x0, y: yF, width: bw, height: Math.max(hF, 0), fill: "var(--s1)", rx: 3 }));
+      svg.appendChild(el("text", { class: "ax", x: cx, y: H - 10, "text-anchor": "middle" }, sprint));
+    });
+
+    return <div className="plot"><svg dangerouslySetInnerHTML={{ __html: svg.outerHTML }} style={{ width: '100%', height: 'auto' }} /></div>;
+  };
+
+  const bugsChart = () => {
+    if (!ct.sprints || ct.sprints.length === 0) {
+      return <div className="plot"><p style={{ padding: '20px', color: 'var(--ink-muted)' }}>Sprint data not yet available</p></div>;
+    }
+
+    const W = 560, H = 232, M = { t: 14, r: 20, b: 30, l: 34 };
+    const iw = W - M.l - M.r, ih = H - M.t - M.b;
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img" });
+
+    const max = 50;
+    const y = v => M.t + ih - (v / max) * ih;
+    const step = iw / ct.sprints.length;
+    const bw = Math.min(17, step * 0.28);
+
+    // Grid
+    for (const v of [0, 10, 20, 30, 40, 50]) {
+      svg.appendChild(el("line", { class: v === 0 ? "baseln" : "gridln", x1: M.l, x2: W - M.r, y1: y(v), y2: y(v) }));
+      svg.appendChild(el("text", { class: "ax", x: M.l - 8, y: y(v) + 4, "text-anchor": "end" }, v));
+    }
+
+    // Bars
+    ct.sprints.forEach((sprint, i) => {
+      const bugs = ct.bySprintBugs[sprint] || { created: 0, resolved: 0 };
+      const cx = M.l + step * i + step / 2;
+
+      svg.appendChild(el("rect", { x: cx - bw - 1, y: y(bugs.created), width: bw, height: y(0) - y(bugs.created), fill: "var(--s2)", rx: 3 }));
+      svg.appendChild(el("rect", { x: cx + 1, y: y(bugs.resolved), width: bw, height: y(0) - y(bugs.resolved), fill: "var(--s1)", rx: 3 }));
+      svg.appendChild(el("text", { class: "ax", x: cx, y: H - 10, "text-anchor": "middle" }, sprint));
+    });
+
+    return <div className="plot"><svg dangerouslySetInnerHTML={{ __html: svg.outerHTML }} style={{ width: '100%', height: 'auto' }} /></div>;
+  };
+
+  const agingChart = () => {
+    const phases = ['Development', 'Dev Ready', 'Testing', 'Product Acceptance'];
+    const W = 560, rowH = 34, M = { t: 24, r: 54, b: 30, l: 132 };
+    const H = M.t + phases.length * rowH + M.b;
+    const iw = W - M.l - M.r;
+    const svg = el("svg", { viewBox: `0 0 ${W} ${H}`, role: "img" });
+
+    const max = 240;
+    const w = v => (v / max) * iw;
+    const bh = 16;
+
+    // Grid
+    for (const v of [0, 60, 120, 180, 240]) {
+      const gx = M.l + w(v);
+      svg.appendChild(el("line", { class: v === 0 ? "baseln" : "gridln", x1: gx, x2: gx, y1: M.t, y2: M.t + phases.length * rowH }));
+      svg.appendChild(el("text", { class: "ax", x: gx, y: H - 12, "text-anchor": "middle" }, v));
+    }
+
+    // Target line
+    const tx = M.l + w(14);
+    svg.appendChild(el("line", { class: "tgtln", x1: tx, x2: tx, y1: M.t, y2: M.t + phases.length * rowH }));
+
+    // Bars
+    phases.forEach((phase, i) => {
+      const data = ct.agingByPhase[phase] || { average: 0 };
+      const days = data.average || 0;
+      const cy = M.t + i * rowH + rowH / 2;
+
+      svg.appendChild(el("rect", { x: M.l, y: cy - bh / 2, width: Math.max(w(days), 2), height: bh, fill: "var(--s1)", rx: 3 }));
+      svg.appendChild(el("text", { class: "ax-b", x: M.l - 10, y: cy + 4, "text-anchor": "end" }, phase));
+      svg.appendChild(el("text", { class: "dlabel", x: M.l + w(days) + 8, y: cy + 4 }, Math.round(days)));
+    });
+
+    svg.appendChild(el("text", { class: "ax", x: tx + 5, y: M.t - 8 }, "target 14d"));
+
+    return <div className="plot"><svg dangerouslySetInnerHTML={{ __html: svg.outerHTML }} style={{ width: '100%', height: 'auto' }} /></div>;
+  };
+
   return (
     <div className="wrap">
       <header className="topbar">
@@ -148,7 +320,7 @@ export default function App() {
       <div className="tiles">
         {tiles.map((tile, idx) => (
           <div key={idx} className="tile" style={{ '--tile-status': `var(--${tile.status})` }}>
-            <div className="name">{tile.name}{tile.est ? ' <span class="est" title="Illustrative sample value, not measured">est</span>' : ''}</div>
+            <div className="name">{tile.name}{tile.est ? ' (est)' : ''}</div>
             <div className="val">
               {tile.value}<span className="unit">{tile.unit}</span>
             </div>
@@ -170,17 +342,57 @@ export default function App() {
         <span className="eyebrow">Trend charts follow the window above</span>
       </div>
 
+      <div className="grid">
+        <ChartCard
+          title="Commitment rate by sprint"
+          sub="Points closed as a share of points committed at sprint start"
+        >
+          {commitmentChart()}
+        </ChartCard>
+
+        <ChartCard
+          title="Capacity mix by sprint"
+          sub="Share of completed points by issue type. Feature = Story, Task, Spike. Maintenance = Bug, Tech Debt"
+        >
+          <div className="legend">
+            <span><span className="swatch" style={{ background: 'var(--s1)' }}></span>Feature</span>
+            <span><span className="swatch" style={{ background: 'var(--s2)' }}></span>Maintenance</span>
+          </div>
+          {capacityChart()}
+        </ChartCard>
+
+        <ChartCard
+          title="Bugs created vs resolved"
+          sub="Bug inflow vs resolution by sprint"
+        >
+          <div className="legend">
+            <span><span className="swatch" style={{ background: 'var(--s2)' }}></span>Created</span>
+            <span><span className="swatch" style={{ background: 'var(--s1)' }}></span>Resolved</span>
+          </div>
+          {bugsChart()}
+        </ChartCard>
+
+        <ChartCard
+          title="Aging work in progress"
+          sub="Average days in current status by workflow phase"
+        >
+          {agingChart()}
+        </ChartCard>
+      </div>
+
+      <div className="section-head">
+        <h2>Project Summaries</h2>
+      </div>
+
       <div className="summary-grid">
         <div className="summary-card">
-          <h3>CareTracker (CT) - Issue Summary</h3>
+          <h3>CareTracker (CT)</h3>
           <dl>
             <dt>Total Issues</dt>
             <dd>{ct.total || 0}</dd>
             <dt>Resolved</dt>
             <dd>{ct.resolved || 0}</dd>
-            <dt>Created</dt>
-            <dd>{ct.created || 0}</dd>
-            <dt>Defects (Bugs)</dt>
+            <dt>Defects</dt>
             <dd>{ct.defects || 0}</dd>
             <dt>Features</dt>
             <dd>{ct.features || 0}</dd>
@@ -192,15 +404,13 @@ export default function App() {
         </div>
 
         <div className="summary-card">
-          <h3>Amplify (AMP) - Issue Summary</h3>
+          <h3>Amplify (AMP)</h3>
           <dl>
             <dt>Total Issues</dt>
             <dd>{amp.total || 0}</dd>
             <dt>Resolved</dt>
             <dd>{amp.resolved || 0}</dd>
-            <dt>Created</dt>
-            <dd>{amp.created || 0}</dd>
-            <dt>Defects (Bugs)</dt>
+            <dt>Defects</dt>
             <dd>{amp.defects || 0}</dd>
             <dt>Features</dt>
             <dd>{amp.features || 0}</dd>
@@ -212,52 +422,9 @@ export default function App() {
         </div>
       </div>
 
-      <div className="summary-grid">
-        <div className="summary-card">
-          <h3>Release Planning - CareTracker</h3>
-          <dl>
-            <dt>Total Epics</dt>
-            <dd>{ctEpics.total || 0}</dd>
-            <dt>Blank Proposed Date</dt>
-            <dd>{ctEpics.blankProposedDate || 0}</dd>
-            <dt>Blank Actual Date</dt>
-            <dd>{ctEpics.blankActualDate || 0}</dd>
-          </dl>
-        </div>
-
-        <div className="summary-card">
-          <h3>Release Planning - Amplify</h3>
-          <dl>
-            <dt>Total Epics</dt>
-            <dd>{ampEpics.total || 0}</dd>
-            <dt>Blank Proposed Date</dt>
-            <dd>{ampEpics.blankProposedDate || 0}</dd>
-            <dt>Blank Actual Date</dt>
-            <dd>{ampEpics.blankActualDate || 0}</dd>
-          </dl>
-        </div>
-      </div>
-
-      <div className="summary-card" style={{ marginTop: '20px' }}>
-        <h3>Aging Work in Progress</h3>
-        <p style={{ fontSize: '12px', color: 'var(--ink-muted)', marginBottom: '12px' }}>Average days issues have spent in each phase</p>
-        <dl>
-          {Object.entries(ct.agingByPhase || {}).map(([phase, data]) => (
-            <div key={phase}>
-              <dt>{phase}</dt>
-              <dd>{data.average || 0} days</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-
       <footer className="foot">
         <div>Dashboard updates daily via GitHub Actions</div>
         <div>Data pulls from Jira API: <code>caretracker.atlassian.net</code></div>
-        <div style={{ marginTop: '8px', fontSize: '12px' }}>
-          Note: Commitment rate trends, capacity mix by sprint, and bug trends require sprint-specific historical data.
-          These will be populated as sprint data is accumulated.
-        </div>
       </footer>
     </div>
   );
