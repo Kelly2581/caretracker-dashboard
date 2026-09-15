@@ -35,7 +35,7 @@ async function fetchProjectData(projectKey) {
     console.log(`Fetching data for ${projectKey}...`);
 
     const jql = `project = "${projectKey}" AND updated >= -30d`;
-    const data = await jiraFetch(`/search/jql?jql=${encodeURIComponent(jql)}&maxResults=500`);
+    const data = await jiraFetch(`/search/jql?jql=${encodeURIComponent(jql)}&maxResults=500&fields=status,issuetype,priority,created`);
 
     console.log(`Got ${data.total} issues from ${projectKey}`);
 
