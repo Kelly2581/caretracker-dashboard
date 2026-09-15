@@ -34,7 +34,9 @@ async function fetchProjectData(projectKey) {
   try {
     console.log(`Fetching data for ${projectKey}...`);
 
-    const jql = `project = "${projectKey}" AND updated >= -30d`;
+    const excludedAssignees = ['Remya', 'Lanying', 'Aqsa', 'Benjamin', 'Shrikar', 'John Hobby'];
+    const assigneeFilter = excludedAssignees.map(name => `assignee != "${name}"`).join(' AND ');
+    const jql = `project = "${projectKey}" AND updated >= -30d AND ${assigneeFilter}`;
     const data = await jiraFetch(`/search/jql?jql=${encodeURIComponent(jql)}&maxResults=500&fields=status,issuetype,priority,created`);
 
     const issuesList = data.issues || [];
