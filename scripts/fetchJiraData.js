@@ -37,11 +37,12 @@ async function fetchProjectData(projectKey) {
     const jql = `project = "${projectKey}" AND updated >= -30d`;
     const data = await jiraFetch(`/search/jql?jql=${encodeURIComponent(jql)}&maxResults=500&fields=status,issuetype,priority,created`);
 
-    console.log(`Got ${data.total} issues from ${projectKey}`);
+    const issuesList = data.issues || [];
+    console.log(`Got ${issuesList.length} issues from ${projectKey}`);
 
     const stats = {
-      total: data.total || 0,
-      issues: data.issues || [],
+      total: issuesList.length,
+      issues: issuesList,
       byStatus: {},
       byType: {},
       byPriority: {},
@@ -51,7 +52,7 @@ async function fetchProjectData(projectKey) {
       features: 0
     };
 
-    (data.issues || []).forEach(issue => {
+    issuesList.forEach(issue => {
       try {
         const status = issue.fields?.status?.name || 'Unknown';
         const type = issue.fields?.issuetype?.name || 'Unknown';
