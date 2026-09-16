@@ -35,10 +35,14 @@ async function jiraFetch(endpoint) {
 async function fetchProjectData(projectKey) {
   try {
     console.log(`Fetching data for ${projectKey}...`);
+    console.log(`JIRA_EMAIL: ${JIRA_EMAIL}`);
 
-    const excludedAssignees = ['Remya', 'Lanying', 'Aqsa', 'Benjamin', 'Shrikar', 'John Hobby'];
     const jql = `project = "${projectKey}" ORDER BY updated DESC`;
+    console.log(`JQL Query: ${jql}`);
+
     const data = await jiraFetch(`/search/jql?jql=${encodeURIComponent(jql)}&maxResults=500&fields=status,issuetype,priority,created,sprint,epic,changelog`);
+
+    console.log(`API Response: total=${data.total}, issues=${data.issues ? data.issues.length : 0}`);
 
     const issuesList = data.issues || [];
     console.log(`Got ${issuesList.length} issues from ${projectKey}`);
