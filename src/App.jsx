@@ -313,13 +313,39 @@ export default function App() {
       </div>
 
       <div className="section-head">
-        <h2>Headline Six</h2>
+        <h2>Metrics</h2>
         <span className="eyebrow">Reported monthly to leadership</span>
       </div>
 
+      <div className="section-head" style={{ marginTop: '32px', marginBottom: '16px' }}>
+        <h3>CareTracker</h3>
+      </div>
       <div className="tiles">
-        {tiles.map((tile, idx) => (
+        {tiles.slice(0, 5).map((tile, idx) => (
           <div key={idx} className="tile" style={{ '--tile-status': `var(--${tile.status})` }}>
+            <div className="name">{tile.name}{tile.est ? ' (est)' : ''}</div>
+            <div className="val">
+              {tile.value}<span className="unit">{tile.unit}</span>
+            </div>
+            <div className="foot">
+              <span className={`pill ${tile.status}`}>
+                <span className="dot"></span>
+                {tile.status === 'good' ? 'on target' : tile.status === 'critical' ? 'critical' : 'needs attention'}
+              </span>
+              <span className="target">
+                target {tile.dir === 'up' ? '≥' : '≤'} {tile.target}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="section-head" style={{ marginTop: '32px', marginBottom: '16px' }}>
+        <h3>Amplify</h3>
+      </div>
+      <div className="tiles">
+        {tiles.slice(5).map((tile, idx) => (
+          <div key={idx + 5} className="tile" style={{ '--tile-status': `var(--${tile.status})` }}>
             <div className="name">{tile.name}{tile.est ? ' (est)' : ''}</div>
             <div className="val">
               {tile.value}<span className="unit">{tile.unit}</span>
