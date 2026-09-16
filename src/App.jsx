@@ -39,6 +39,7 @@ export default function App() {
   const calculateRate = (resolved, total) => total > 0 ? Math.round((resolved / total) * 100) : 0;
   const calculateDefectRate = (defects, total) => total > 0 ? Math.round((defects / total) * 100) : 0;
   const calculateCapacity = (features, total) => total > 0 ? Math.round((features / total) * 100) : 0;
+  const calculateEscapeRate = (created, resolved) => created > 0 ? Math.round(((created - resolved) / created) * 100) : 0;
 
   const tiles = [
     {
@@ -51,13 +52,12 @@ export default function App() {
       calc: `(${ct.resolved || 0} resolved / ${ct.total || 0} total) × 100`
     },
     {
-      name: 'CT Defect Escape Rate (est)',
-      value: 51,
+      name: 'CT Defect Escape Rate',
+      value: calculateEscapeRate(ct.bugsCreated, ct.bugsResolved),
       unit: '%',
       target: 10,
       dir: 'down',
-      status: 51 <= 10 ? 'good' : 'critical',
-      est: true,
+      status: calculateEscapeRate(ct.bugsCreated, ct.bugsResolved) <= 10 ? 'good' : 'critical',
       calc: `(${ct.bugsCreated - ct.bugsResolved || 0} unresolved / ${ct.bugsCreated || 0} created) × 100`
     },
     {
@@ -99,13 +99,12 @@ export default function App() {
       calc: `(${amp.resolved || 0} resolved / ${amp.total || 0} total) × 100`
     },
     {
-      name: 'AMP Defect Escape Rate (est)',
-      value: 48,
+      name: 'AMP Defect Escape Rate',
+      value: calculateEscapeRate(amp.bugsCreated, amp.bugsResolved),
       unit: '%',
       target: 10,
       dir: 'down',
-      status: 48 <= 10 ? 'good' : 'critical',
-      est: true,
+      status: calculateEscapeRate(amp.bugsCreated, amp.bugsResolved) <= 10 ? 'good' : 'critical',
       calc: `(${amp.bugsCreated - amp.bugsResolved || 0} unresolved / ${amp.bugsCreated || 0} created) × 100`
     },
     {
