@@ -40,7 +40,7 @@ async function fetchProjectData(projectKey) {
     const jql = `project = "${projectKey}"`;
     console.log(`JQL Query: ${jql}`);
 
-    const data = await jiraFetch(`/search?jql=${encodeURIComponent(jql)}&maxResults=500&fields=status,issuetype,priority,created,sprint,epic,changelog`);
+    const data = await jiraFetch(`/search/jql?jql=${encodeURIComponent(jql)}&maxResults=500&fields=status,issuetype,priority,created,sprint,epic,changelog`);
 
     console.log(`API Response: ${JSON.stringify(data).substring(0, 500)}`);
 
