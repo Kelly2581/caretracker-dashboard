@@ -37,11 +37,6 @@ jobs:
           git add public/jira-data.json
           git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update jira data" && git push)
 
-      - name: Build dashboard
-        run: npm run build
-
-      - name: Deploy to Vercel
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        run: npx vercel deploy --prod --yes --token=$VERCEL_TOKEN --projectId=$VERCEL_PROJECT_ID
+      - name: Push changes to trigger Vercel deployment
+        run: |
+          git log -1 --oneline
