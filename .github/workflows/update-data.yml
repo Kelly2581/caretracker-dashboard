@@ -2,8 +2,8 @@ name: Update Jira Data
 
 on:
   schedule:
-    # Daily at 9:00 AM EST (14:00 UTC)
-    - cron: '0 14 * * *'
+    # Monday-Friday at 9:00 AM EST (14:00 UTC)
+    - cron: '0 14 * * 1-5'
   workflow_dispatch:
 
 jobs:
