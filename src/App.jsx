@@ -47,7 +47,8 @@ export default function App() {
       unit: '%',
       target: 85,
       dir: 'up',
-      status: calculateRate(ct.resolved, ct.total) >= 85 ? 'good' : 'warning'
+      status: calculateRate(ct.resolved, ct.total) >= 85 ? 'good' : 'warning',
+      calc: `(${ct.resolved || 0} resolved / ${ct.total || 0} total) × 100`
     },
     {
       name: 'CT Defect Escape Rate (est)',
@@ -56,7 +57,8 @@ export default function App() {
       target: 10,
       dir: 'down',
       status: 51 <= 10 ? 'good' : 'critical',
-      est: true
+      est: true,
+      calc: `(${ct.bugsCreated - ct.bugsResolved || 0} unresolved / ${ct.bugsCreated || 0} created) × 100`
     },
     {
       name: 'CT Feature Capacity',
@@ -64,7 +66,8 @@ export default function App() {
       unit: '% of work',
       target: 70,
       dir: 'up',
-      status: calculateCapacity(ct.features, ct.total) >= 70 ? 'good' : 'warning'
+      status: calculateCapacity(ct.features, ct.total) >= 70 ? 'good' : 'warning',
+      calc: `(${ct.features || 0} features / ${ct.total || 0} total) × 100`
     },
     {
       name: 'CT Cycle Time p85',
@@ -73,7 +76,8 @@ export default function App() {
       target: 10,
       dir: 'down',
       status: (ct.cycleTimeP85 || 18.4) <= 10 ? 'good' : 'warning',
-      est: true
+      est: true,
+      calc: '85th percentile of days from creation to release'
     },
     {
       name: 'Release on Date (est)',
@@ -82,7 +86,8 @@ export default function App() {
       target: 90,
       dir: 'up',
       status: 62 >= 90 ? 'good' : 'warning',
-      est: true
+      est: true,
+      calc: 'Estimated % of work completed on schedule'
     },
     {
       name: 'AMP Commitment Rate',
@@ -90,7 +95,8 @@ export default function App() {
       unit: '%',
       target: 85,
       dir: 'up',
-      status: calculateRate(amp.resolved, amp.total) >= 85 ? 'good' : 'warning'
+      status: calculateRate(amp.resolved, amp.total) >= 85 ? 'good' : 'warning',
+      calc: `(${amp.resolved || 0} resolved / ${amp.total || 0} total) × 100`
     },
     {
       name: 'AMP Defect Escape Rate (est)',
@@ -99,7 +105,8 @@ export default function App() {
       target: 10,
       dir: 'down',
       status: 48 <= 10 ? 'good' : 'critical',
-      est: true
+      est: true,
+      calc: `(${amp.bugsCreated - amp.bugsResolved || 0} unresolved / ${amp.bugsCreated || 0} created) × 100`
     },
     {
       name: 'AMP Feature Capacity',
@@ -107,7 +114,8 @@ export default function App() {
       unit: '% of work',
       target: 70,
       dir: 'up',
-      status: calculateCapacity(amp.features, amp.total) >= 70 ? 'good' : 'warning'
+      status: calculateCapacity(amp.features, amp.total) >= 70 ? 'good' : 'warning',
+      calc: `(${amp.features || 0} features / ${amp.total || 0} total) × 100`
     },
     {
       name: 'AMP Cycle Time p85',
@@ -116,7 +124,8 @@ export default function App() {
       target: 10,
       dir: 'down',
       status: (amp.cycleTimeP85 || 16.1) <= 10 ? 'good' : 'warning',
-      est: true
+      est: true,
+      calc: '85th percentile of days from creation to release'
     }
   ];
 
@@ -329,6 +338,9 @@ export default function App() {
             <div className="val">
               {tile.value}<span className="unit">{tile.unit}</span>
             </div>
+            <div style={{ fontSize: '12px', color: 'var(--ink-muted)', margin: '8px 0 0 0' }}>
+              {tile.calc}
+            </div>
             <div className="foot">
               <span className={`pill ${tile.status}`}>
                 <span className="dot"></span>
@@ -351,6 +363,9 @@ export default function App() {
             <div className="name">{tile.name}{tile.est ? ' (est)' : ''}</div>
             <div className="val">
               {tile.value}<span className="unit">{tile.unit}</span>
+            </div>
+            <div style={{ fontSize: '12px', color: 'var(--ink-muted)', margin: '8px 0 0 0' }}>
+              {tile.calc}
             </div>
             <div className="foot">
               <span className={`pill ${tile.status}`}>
