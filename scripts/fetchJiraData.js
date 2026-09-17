@@ -172,15 +172,18 @@ async function fetchProjectData(projectKey) {
           stats.agingByPhase[status].days.push(daysOpen);
           stats.agingByPhase[status].count++;
 
-          // Store individual issue details for aging
-          const assignee = issue.fields?.assignee?.displayName || 'Unassigned';
-          stats.agingIssues.push({
-            key: issue.key,
-            title: issue.fields?.summary || 'No title',
-            assignee: assignee,
-            status: status,
-            daysInStatus: Math.round(daysOpen)
-          });
+          // Store individual issue details for aging (only if assigned and has title)
+          const assignee = issue.fields?.assignee?.displayName;
+          const title = issue.fields?.summary;
+          if (assignee && title) {
+            stats.agingIssues.push({
+              key: issue.key,
+              title: title,
+              assignee: assignee,
+              status: status,
+              daysInStatus: Math.round(daysOpen)
+            });
+          }
         }
 
       } catch (err) {
