@@ -138,8 +138,27 @@ async function fetchProjectData(projectKey) {
         }
 
         // Cycle time calculation (Development to Release Ready)
-        if (status === 'Release Ready') {
-          const changelog = issue.changelog?.histories || [];
+        const changelog = issue.changelog?.histories || [];
+        const statusTransitions = [];
+
+        for (const history of changelog) {
+          for (const item of history.items || []) {
+            if (item.field === 'status') {
+              statusTransitions.push({
+                from: item.fromString,
+                to: item.toString,
+                date: history.created
+              });
+            }
+          }
+        }
+
+        if (statusTransitions.length > 0 && !issue.logged) {
+          console.log(`[CYCLE TIME DEBUG] ${issue.key} status transitions:`, statusTransitions);
+          issue.logged = true;
+        }
+
+        if (status === 'Release Ready' || status === 'Production Ready') {
           let developmentDate = null;
           let releaseReadyDate = null;
 
@@ -148,7 +167,7 @@ async function fetchProjectData(projectKey) {
               if (item.field === 'status' && item.toString === 'Development' && !developmentDate) {
                 developmentDate = new Date(history.created);
               }
-              if (item.field === 'status' && item.toString === 'Release Ready') {
+              if (item.field === 'status' && (item.toString === 'Release Ready' || item.toString === 'Production Ready')) {
                 releaseReadyDate = new Date(history.created);
               }
             }
