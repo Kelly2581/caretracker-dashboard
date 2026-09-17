@@ -137,21 +137,25 @@ async function fetchProjectData(projectKey) {
           }
         }
 
-        // Cycle time calculation (Dev Ready to Release Ready)
+        // Cycle time calculation (Development to Release Ready)
         if (status === 'Release Ready') {
           const changelog = issue.changelog?.histories || [];
-          let devReadyDate = null;
+          let developmentDate = null;
+          let releaseReadyDate = null;
 
           for (const history of changelog) {
             for (const item of history.items || []) {
-              if (item.field === 'status' && item.toString === 'Dev Ready') {
-                devReadyDate = new Date(history.created);
+              if (item.field === 'status' && item.toString === 'Development' && !developmentDate) {
+                developmentDate = new Date(history.created);
+              }
+              if (item.field === 'status' && item.toString === 'Release Ready') {
+                releaseReadyDate = new Date(history.created);
               }
             }
           }
 
-          if (devReadyDate && createdDate) {
-            const cycleTime = (new Date(status === 'Release Ready' ? status : createdDate) - devReadyDate) / (1000 * 60 * 60 * 24);
+          if (developmentDate && releaseReadyDate) {
+            const cycleTime = (releaseReadyDate - developmentDate) / (1000 * 60 * 60 * 24);
             if (cycleTime > 0) stats.cycleTimesDevToRelease.push(cycleTime);
           }
         }

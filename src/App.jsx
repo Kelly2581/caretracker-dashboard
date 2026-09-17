@@ -77,7 +77,7 @@ export default function App() {
       dir: 'down',
       status: (ct.cycleTimeP85 || 18.4) <= 10 ? 'good' : 'warning',
       est: true,
-      calc: '85th percentile of days from creation to release'
+      calc: '85th percentile of days from Development status to Release Ready'
     },
     {
       name: 'Release on Date (est)',
@@ -124,7 +124,7 @@ export default function App() {
       dir: 'down',
       status: (amp.cycleTimeP85 || 16.1) <= 10 ? 'good' : 'warning',
       est: true,
-      calc: '85th percentile of days from creation to release'
+      calc: '85th percentile of days from Development status to Release Ready'
     }
   ];
 
