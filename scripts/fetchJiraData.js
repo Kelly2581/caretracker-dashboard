@@ -15,6 +15,9 @@ const excludedAssignees = ['Remya', 'Lanying', 'Aqsa', 'Benjamin', 'Shrikar', 'J
 
 const auth = Buffer.from(`${JIRA_EMAIL}:${JIRA_API_TOKEN}`).toString('base64');
 
+console.log(`[INIT] JIRA_EMAIL: ${JIRA_EMAIL}`);
+console.log(`[INIT] JIRA_API_TOKEN length: ${JIRA_API_TOKEN ? JIRA_API_TOKEN.length : 0}`);
+
 async function jiraFetch(endpoint) {
   const url = `https://${JIRA_DOMAIN}/rest/api/3${endpoint}`;
   console.log(`API URL: ${url}`);
