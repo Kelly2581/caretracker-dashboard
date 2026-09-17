@@ -148,8 +148,11 @@ async function fetchProjectData(projectKey) {
         }
 
         // Cycle time calculation (Development to Release Ready)
-        // For issues in Release Ready, fetch their full changelog
-        if (status === 'Release Ready' || status === 'Production Ready') {
+        // Fetch changelog for issues that might have gone through Development → Release Ready
+        const shouldFetchChangelog = status === 'Release Ready' || status === 'Production Ready' ||
+                                     status === 'Product Acceptance' || status === 'Done' || status === 'Closed';
+
+        if (shouldFetchChangelog) {
           const fullIssue = await fetchIssueWithChangelog(issue.key);
           if (fullIssue) {
             const changelog = fullIssue.changelog?.histories || [];
@@ -173,8 +176,6 @@ async function fetchProjectData(projectKey) {
                 stats.cycleTimesDevToRelease.push(cycleTime);
                 console.log(`[CYCLE TIME] ${issue.key}: ${cycleTime.toFixed(1)} days (Development → Release Ready)`);
               }
-            } else {
-              console.log(`[CYCLE TIME SKIP] ${issue.key}: Missing Development=${!developmentDate} or Release=${!releaseReadyDate}`);
             }
           }
         }
