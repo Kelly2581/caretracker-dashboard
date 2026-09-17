@@ -77,6 +77,7 @@ async function fetchProjectData(projectKey) {
       agingIssues: []
     };
 
+    let changelogCount = 0;
     issuesList.forEach(issue => {
       try {
         const status = issue.fields?.status?.name || 'Unknown';
@@ -85,6 +86,11 @@ async function fetchProjectData(projectKey) {
         const sprints = issue.fields?.sprint || [];
         const sprintName = sprints && sprints.length > 0 ? sprints[0].name : 'No Sprint';
         const createdDate = issue.fields?.created ? new Date(issue.fields.created) : null;
+        const hasChangelog = issue.changelog?.histories ? true : false;
+        if (hasChangelog && changelogCount < 3) {
+          console.log(`[CHANGELOG CHECK] ${issue.key} has changelog with ${issue.changelog.histories.length} entries`);
+          changelogCount++;
+        }
 
         // Basic counts
         stats.byStatus[status] = (stats.byStatus[status] || 0) + 1;
