@@ -17,12 +17,17 @@ const auth = Buffer.from(`${JIRA_EMAIL}:${JIRA_API_TOKEN}`).toString('base64');
 
 async function jiraFetch(endpoint) {
   const url = `https://${JIRA_DOMAIN}/rest/api/3${endpoint}`;
+  console.log(`API URL: ${url}`);
+  console.log(`Auth header present: ${auth ? 'yes' : 'no'}, length: ${auth ? auth.length : 0}`);
+
   const response = await fetch(url, {
     headers: {
       'Authorization': `Basic ${auth}`,
       'Content-Type': 'application/json'
     }
   });
+
+  console.log(`Response status: ${response.status}`);
 
   if (!response.ok) {
     const text = await response.text();
