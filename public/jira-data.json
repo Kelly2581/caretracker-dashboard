@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-17T14:06:36.774Z",
+  "timestamp": "2026-09-17T14:12:59.901Z",
   "projects": {
     "CT": {
       "total": 100,
@@ -67,17 +67,17 @@
             },
             "created": "2026-09-16T12:26:32.113-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/1",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10034",
               "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/open.png",
-              "name": "Open",
-              "id": "1",
+              "iconUrl": "https://caretracker.atlassian.net/",
+              "name": "On Hold",
+              "id": "10034",
               "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/2",
-                "id": 2,
-                "key": "new",
-                "colorName": "blue-gray",
-                "name": "To Do"
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/4",
+                "id": 4,
+                "key": "indeterminate",
+                "colorName": "yellow",
+                "name": "In Progress"
               }
             }
           }
@@ -3900,8 +3900,9 @@
       ],
       "byStatus": {
         "Development": 7,
-        "Open": 11,
+        "On Hold": 1,
         "Dev Ready": 29,
+        "Open": 10,
         "Sizing": 5,
         "Closed": 34,
         "Story Development": 12,
