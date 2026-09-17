@@ -40,6 +40,16 @@ async function jiraFetch(endpoint) {
   return response.json();
 }
 
+async function fetchIssueWithChangelog(issueKey) {
+  try {
+    const response = await jiraFetch(`/issues/${issueKey}?expand=changelog`);
+    return response;
+  } catch (err) {
+    console.warn(`Could not fetch changelog for ${issueKey}: ${err.message}`);
+    return null;
+  }
+}
+
 async function fetchProjectData(projectKey) {
   try {
     console.log(`Fetching data for ${projectKey}...`);
@@ -48,7 +58,7 @@ async function fetchProjectData(projectKey) {
     const jql = `project = "${projectKey}"`;
     console.log(`JQL Query: ${jql}`);
 
-    const data = await jiraFetch(`/search/jql?jql=${encodeURIComponent(jql)}&maxResults=500&fields=status,issuetype,priority,created,sprint,epic,changelog&expand=changelog`);
+    const data = await jiraFetch(`/search/jql?jql=${encodeURIComponent(jql)}&maxResults=500&fields=status,issuetype,priority,created,sprint,epic`);
 
     console.log(`API Response: ${JSON.stringify(data).substring(0, 500)}`);
 
@@ -77,8 +87,7 @@ async function fetchProjectData(projectKey) {
       agingIssues: []
     };
 
-    let changelogCount = 0;
-    issuesList.forEach(issue => {
+    for (const issue of issuesList) {
       try {
         const status = issue.fields?.status?.name || 'Unknown';
         const type = issue.fields?.issuetype?.name || 'Unknown';
@@ -144,48 +153,34 @@ async function fetchProjectData(projectKey) {
         }
 
         // Cycle time calculation (Development to Release Ready)
-        const changelog = issue.changelog?.histories || [];
-        const statusTransitions = [];
-
-        for (const history of changelog) {
-          for (const item of history.items || []) {
-            if (item.field === 'status') {
-              statusTransitions.push({
-                from: item.fromString,
-                to: item.toString,
-                date: history.created
-              });
-            }
-          }
-        }
-
-        if (statusTransitions.length > 0) {
-          console.log(`[CYCLE TIME DEBUG] ${issue.key} has ${statusTransitions.length} status transitions, current status: ${status}`);
-        }
-
+        // For issues in Release Ready, fetch their full changelog
         if (status === 'Release Ready' || status === 'Production Ready') {
-          let developmentDate = null;
-          let releaseReadyDate = null;
+          const fullIssue = await fetchIssueWithChangelog(issue.key);
+          if (fullIssue) {
+            const changelog = fullIssue.changelog?.histories || [];
+            let developmentDate = null;
+            let releaseReadyDate = null;
 
-          for (const history of changelog) {
-            for (const item of history.items || []) {
-              if (item.field === 'status' && item.toString === 'Development' && !developmentDate) {
-                developmentDate = new Date(history.created);
-              }
-              if (item.field === 'status' && (item.toString === 'Release Ready' || item.toString === 'Production Ready')) {
-                releaseReadyDate = new Date(history.created);
+            for (const history of changelog) {
+              for (const item of history.items || []) {
+                if (item.field === 'status' && item.toString === 'Development' && !developmentDate) {
+                  developmentDate = new Date(history.created);
+                }
+                if (item.field === 'status' && (item.toString === 'Release Ready' || item.toString === 'Production Ready')) {
+                  releaseReadyDate = new Date(history.created);
+                }
               }
             }
-          }
 
-          if (developmentDate && releaseReadyDate) {
-            const cycleTime = (releaseReadyDate - developmentDate) / (1000 * 60 * 60 * 24);
-            if (cycleTime > 0) {
-              stats.cycleTimesDevToRelease.push(cycleTime);
-              console.log(`[CYCLE TIME FOUND] ${issue.key}: ${cycleTime.toFixed(1)} days`);
+            if (developmentDate && releaseReadyDate) {
+              const cycleTime = (releaseReadyDate - developmentDate) / (1000 * 60 * 60 * 24);
+              if (cycleTime > 0) {
+                stats.cycleTimesDevToRelease.push(cycleTime);
+                console.log(`[CYCLE TIME] ${issue.key}: ${cycleTime.toFixed(1)} days (Development → Release Ready)`);
+              }
+            } else {
+              console.log(`[CYCLE TIME SKIP] ${issue.key}: Missing Development=${!developmentDate} or Release=${!releaseReadyDate}`);
             }
-          } else if (status === 'Release Ready' || status === 'Production Ready') {
-            console.log(`[CYCLE TIME MISS] ${issue.key}: Dev=${developmentDate ? 'YES' : 'NO'}, Release=${releaseReadyDate ? 'YES' : 'NO'}`);
           }
         }
 
@@ -222,7 +217,7 @@ async function fetchProjectData(projectKey) {
       } catch (err) {
         console.warn(`Error processing issue ${issue.key}:`, err.message);
       }
-    });
+    }
 
     // Calculate averages for aging
     for (const phase in stats.agingByPhase) {
