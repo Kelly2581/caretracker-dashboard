@@ -11,7 +11,11 @@ const el = (tag, attrs = {}, text) => {
   return n;
 };
 
+const PASSWORD = 'FQ8NXOOpm/5Yt3VB55vkMTCONmiXIyPK';
+
 export default function App() {
+  const [authenticated, setAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -28,6 +32,55 @@ export default function App() {
         setLoading(false);
       });
   }, []);
+
+  if (!authenticated) {
+    const handleLogin = () => {
+      if (passwordInput === PASSWORD) {
+        setAuthenticated(true);
+      } else {
+        alert('Incorrect password');
+        setPasswordInput('');
+      }
+    };
+
+    return (
+      <div className="wrap" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
+        <div style={{ textAlign: 'center', padding: '40px', borderRadius: '8px', background: 'var(--surface-secondary)' }}>
+          <h2 style={{ marginBottom: '24px' }}>Dashboard Access</h2>
+          <input
+            type="password"
+            placeholder="Enter password"
+            value={passwordInput}
+            onChange={(e) => setPasswordInput(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' && handleLogin()}
+            style={{
+              padding: '8px 12px',
+              fontSize: '14px',
+              border: '1px solid var(--ink-muted)',
+              borderRadius: '4px',
+              marginRight: '8px',
+              background: 'var(--surface)',
+              color: 'var(--ink)'
+            }}
+          />
+          <button
+            onClick={handleLogin}
+            style={{
+              padding: '8px 16px',
+              fontSize: '14px',
+              borderRadius: '4px',
+              background: 'var(--s1)',
+              color: 'white',
+              border: 'none',
+              cursor: 'pointer'
+            }}
+          >
+            Login
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   if (loading) return <div className="loading">Loading dashboard...</div>;
   if (error) return <div className="error">Error: {error}</div>;
