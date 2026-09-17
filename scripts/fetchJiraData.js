@@ -48,7 +48,7 @@ async function fetchProjectData(projectKey) {
     const jql = `project = "${projectKey}"`;
     console.log(`JQL Query: ${jql}`);
 
-    const data = await jiraFetch(`/search/jql?jql=${encodeURIComponent(jql)}&maxResults=500&fields=status,issuetype,priority,created,sprint,epic,changelog`);
+    const data = await jiraFetch(`/search/jql?jql=${encodeURIComponent(jql)}&maxResults=500&fields=status,issuetype,priority,created,sprint,epic,changelog&expand=changelog`);
 
     console.log(`API Response: ${JSON.stringify(data).substring(0, 500)}`);
 
@@ -153,9 +153,8 @@ async function fetchProjectData(projectKey) {
           }
         }
 
-        if (statusTransitions.length > 0 && !issue.logged) {
-          console.log(`[CYCLE TIME DEBUG] ${issue.key} status transitions:`, statusTransitions);
-          issue.logged = true;
+        if (statusTransitions.length > 0) {
+          console.log(`[CYCLE TIME DEBUG] ${issue.key} has ${statusTransitions.length} status transitions, current status: ${status}`);
         }
 
         if (status === 'Release Ready' || status === 'Production Ready') {
@@ -175,7 +174,12 @@ async function fetchProjectData(projectKey) {
 
           if (developmentDate && releaseReadyDate) {
             const cycleTime = (releaseReadyDate - developmentDate) / (1000 * 60 * 60 * 24);
-            if (cycleTime > 0) stats.cycleTimesDevToRelease.push(cycleTime);
+            if (cycleTime > 0) {
+              stats.cycleTimesDevToRelease.push(cycleTime);
+              console.log(`[CYCLE TIME FOUND] ${issue.key}: ${cycleTime.toFixed(1)} days`);
+            }
+          } else if (status === 'Release Ready' || status === 'Production Ready') {
+            console.log(`[CYCLE TIME MISS] ${issue.key}: Dev=${developmentDate ? 'YES' : 'NO'}, Release=${releaseReadyDate ? 'YES' : 'NO'}`);
           }
         }
 
