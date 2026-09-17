@@ -422,6 +422,45 @@ export default function App() {
         </ChartCard>
       </div>
 
+      <div style={{ marginTop: '32px', overflowX: 'auto' }}>
+        <h3 style={{ marginBottom: '16px' }}>Tickets in Progress by Days in Status</h3>
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px' }}>
+          <thead>
+            <tr style={{ borderBottom: '2px solid var(--ink-lighter)', backgroundColor: 'var(--surface-secondary)' }}>
+              <th style={{ padding: '12px', textAlign: 'left', fontWeight: '600' }}>Ticket</th>
+              <th style={{ padding: '12px', textAlign: 'left', fontWeight: '600' }}>Title</th>
+              <th style={{ padding: '12px', textAlign: 'left', fontWeight: '600' }}>Assigned To</th>
+              <th style={{ padding: '12px', textAlign: 'left', fontWeight: '600' }}>Status</th>
+              <th style={{ padding: '12px', textAlign: 'right', fontWeight: '600' }}>Days in Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {ct.agingIssues && ct.agingIssues.length > 0 ? (
+              [...ct.agingIssues, ...(amp.agingIssues || [])]
+                .sort((a, b) => b.daysInStatus - a.daysInStatus)
+                .slice(0, 25)
+                .map((issue, idx) => (
+                  <tr key={idx} style={{ borderBottom: '1px solid var(--ink-lighter)' }}>
+                    <td style={{ padding: '12px' }}><strong>{issue.key}</strong></td>
+                    <td style={{ padding: '12px' }}>{issue.title}</td>
+                    <td style={{ padding: '12px' }}>{issue.assignee}</td>
+                    <td style={{ padding: '12px' }}>{issue.status}</td>
+                    <td style={{ padding: '12px', textAlign: 'right', fontWeight: '600', color: issue.daysInStatus > 20 ? 'var(--critical)' : issue.daysInStatus > 10 ? 'var(--warning)' : 'var(--good)' }}>
+                      {issue.daysInStatus}
+                    </td>
+                  </tr>
+                ))
+            ) : (
+              <tr>
+                <td colSpan="5" style={{ padding: '12px', textAlign: 'center', color: 'var(--ink-muted)' }}>
+                  No aging issues
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+
       <div className="section-head">
         <h2>Project Summaries</h2>
       </div>
