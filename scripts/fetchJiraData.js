@@ -73,7 +73,8 @@ async function fetchProjectData(projectKey) {
       bugsCreated: 0,
       bugsResolved: 0,
       cycleTimesDevToRelease: [],
-      agingByPhase: {}
+      agingByPhase: {},
+      agingIssues: []
     };
 
     issuesList.forEach(issue => {
@@ -170,6 +171,16 @@ async function fetchProjectData(projectKey) {
           const daysOpen = createdDate ? (Date.now() - createdDate) / (1000 * 60 * 60 * 24) : 0;
           stats.agingByPhase[status].days.push(daysOpen);
           stats.agingByPhase[status].count++;
+
+          // Store individual issue details for aging
+          const assignee = issue.fields?.assignee?.displayName || 'Unassigned';
+          stats.agingIssues.push({
+            key: issue.key,
+            title: issue.fields?.summary || 'No title',
+            assignee: assignee,
+            status: status,
+            daysInStatus: Math.round(daysOpen)
+          });
         }
 
       } catch (err) {
