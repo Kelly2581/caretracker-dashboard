@@ -42,7 +42,7 @@ async function jiraFetch(endpoint) {
 
 async function fetchIssueWithChangelog(issueKey) {
   try {
-    const response = await jiraFetch(`/issues/${issueKey}?expand=changelog`);
+    const response = await jiraFetch(`/issue/${issueKey}?expand=changelog`);
     return response;
   } catch (err) {
     console.warn(`Could not fetch changelog for ${issueKey}: ${err.message}`);
@@ -95,11 +95,6 @@ async function fetchProjectData(projectKey) {
         const sprints = issue.fields?.sprint || [];
         const sprintName = sprints && sprints.length > 0 ? sprints[0].name : 'No Sprint';
         const createdDate = issue.fields?.created ? new Date(issue.fields.created) : null;
-        const hasChangelog = issue.changelog?.histories ? true : false;
-        if (hasChangelog && changelogCount < 3) {
-          console.log(`[CHANGELOG CHECK] ${issue.key} has changelog with ${issue.changelog.histories.length} entries`);
-          changelogCount++;
-        }
 
         // Basic counts
         stats.byStatus[status] = (stats.byStatus[status] || 0) + 1;
