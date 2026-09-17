@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-17T14:43:17.538Z",
+  "timestamp": "2026-09-17T14:47:49.846Z",
   "projects": {
     "CT": {
       "total": 100,
@@ -7893,7 +7893,7 @@
         }
       },
       "agingIssues": [],
-      "cycleTimeP85": 0
+      "cycleTimeP85": 6.000690439814814
     }
   },
   "epics": {
