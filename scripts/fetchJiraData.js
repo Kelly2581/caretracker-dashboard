@@ -222,12 +222,15 @@ async function fetchProjectData(projectKey) {
     }
 
     // Calculate p85 cycle time
+    console.log(`[P85 CALC] ${projectKey}: Found ${stats.cycleTimesDevToRelease.length} cycle times`);
     if (stats.cycleTimesDevToRelease.length > 0) {
       stats.cycleTimesDevToRelease.sort((a, b) => a - b);
       const p85Index = Math.ceil(stats.cycleTimesDevToRelease.length * 0.85) - 1;
       stats.cycleTimeP85 = stats.cycleTimesDevToRelease[Math.max(0, p85Index)];
+      console.log(`[P85 CALC] ${projectKey}: p85Index=${p85Index}, cycleTimeP85=${stats.cycleTimeP85.toFixed(2)}`);
     } else {
       stats.cycleTimeP85 = 0;
+      console.log(`[P85 CALC] ${projectKey}: No cycle times found, setting to 0`);
     }
 
     delete stats.cycleTimesDevToRelease;
