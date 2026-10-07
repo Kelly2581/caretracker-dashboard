@@ -1,9 +1,477 @@
 {
-  "timestamp": "2026-10-06T19:09:57.530Z",
+  "timestamp": "2026-10-07T19:37:10.590Z",
   "projects": {
     "CT": {
       "total": 100,
       "issues": [
+        {
+          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+          "id": "37397",
+          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37397",
+          "key": "CT-6941",
+          "fields": {
+            "issuetype": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10015",
+              "id": "10015",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+              "name": "Task",
+              "subtask": false,
+              "avatarId": 10318,
+              "hierarchyLevel": 0
+            },
+            "priority": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
+              "name": "Medium",
+              "id": "3"
+            },
+            "created": "2026-10-07T15:31:53.884-0400",
+            "status": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/1",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/open.png",
+              "name": "Open",
+              "id": "1",
+              "statusCategory": {
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/2",
+                "id": 2,
+                "key": "new",
+                "colorName": "blue-gray",
+                "name": "To Do"
+              }
+            }
+          }
+        },
+        {
+          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+          "id": "37396",
+          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37396",
+          "key": "CT-6940",
+          "fields": {
+            "issuetype": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10015",
+              "id": "10015",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+              "name": "Task",
+              "subtask": false,
+              "avatarId": 10318,
+              "hierarchyLevel": 0
+            },
+            "priority": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
+              "name": "Medium",
+              "id": "3"
+            },
+            "created": "2026-10-07T15:05:27.508-0400",
+            "status": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10005",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
+              "name": "Development",
+              "id": "10005",
+              "statusCategory": {
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/4",
+                "id": 4,
+                "key": "indeterminate",
+                "colorName": "yellow",
+                "name": "In Progress"
+              }
+            }
+          }
+        },
+        {
+          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+          "id": "37395",
+          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37395",
+          "key": "CT-6939",
+          "fields": {
+            "issuetype": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10021",
+              "id": "10021",
+              "description": "Used to create Package Database items as this has a different workflow than a non-package database change.",
+              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10300?size=medium",
+              "name": "DB Package Change",
+              "subtask": false,
+              "avatarId": 10300,
+              "hierarchyLevel": 0
+            },
+            "priority": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
+              "name": "Medium",
+              "id": "3"
+            },
+            "created": "2026-10-07T14:55:45.768-0400",
+            "status": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10005",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
+              "name": "Development",
+              "id": "10005",
+              "statusCategory": {
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/4",
+                "id": 4,
+                "key": "indeterminate",
+                "colorName": "yellow",
+                "name": "In Progress"
+              }
+            }
+          }
+        },
+        {
+          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+          "id": "37393",
+          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37393",
+          "key": "CT-6938",
+          "fields": {
+            "issuetype": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10011",
+              "id": "10011",
+              "description": "A problem or error.",
+              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10303?size=medium",
+              "name": "Bug",
+              "subtask": false,
+              "avatarId": 10303,
+              "hierarchyLevel": 0
+            },
+            "priority": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
+              "name": "Medium",
+              "id": "3"
+            },
+            "created": "2026-10-07T10:48:31.316-0400",
+            "status": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/1",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/open.png",
+              "name": "Open",
+              "id": "1",
+              "statusCategory": {
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/2",
+                "id": 2,
+                "key": "new",
+                "colorName": "blue-gray",
+                "name": "To Do"
+              }
+            }
+          }
+        },
+        {
+          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+          "id": "37392",
+          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37392",
+          "key": "CT-6937",
+          "fields": {
+            "issuetype": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10021",
+              "id": "10021",
+              "description": "Used to create Package Database items as this has a different workflow than a non-package database change.",
+              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10300?size=medium",
+              "name": "DB Package Change",
+              "subtask": false,
+              "avatarId": 10300,
+              "hierarchyLevel": 0
+            },
+            "priority": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
+              "name": "Medium",
+              "id": "3"
+            },
+            "created": "2026-10-07T09:40:58.590-0400",
+            "status": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/1",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/open.png",
+              "name": "Open",
+              "id": "1",
+              "statusCategory": {
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/2",
+                "id": 2,
+                "key": "new",
+                "colorName": "blue-gray",
+                "name": "To Do"
+              }
+            }
+          }
+        },
+        {
+          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+          "id": "37391",
+          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37391",
+          "key": "CT-6936",
+          "fields": {
+            "issuetype": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10015",
+              "id": "10015",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+              "name": "Task",
+              "subtask": false,
+              "avatarId": 10318,
+              "hierarchyLevel": 0
+            },
+            "priority": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
+              "name": "Medium",
+              "id": "3"
+            },
+            "created": "2026-10-07T09:17:54.414-0400",
+            "status": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10005",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
+              "name": "Development",
+              "id": "10005",
+              "statusCategory": {
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/4",
+                "id": 4,
+                "key": "indeterminate",
+                "colorName": "yellow",
+                "name": "In Progress"
+              }
+            }
+          }
+        },
+        {
+          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+          "id": "37390",
+          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37390",
+          "key": "CT-6935",
+          "fields": {
+            "issuetype": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10021",
+              "id": "10021",
+              "description": "Used to create Package Database items as this has a different workflow than a non-package database change.",
+              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10300?size=medium",
+              "name": "DB Package Change",
+              "subtask": false,
+              "avatarId": 10300,
+              "hierarchyLevel": 0
+            },
+            "priority": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
+              "name": "Medium",
+              "id": "3"
+            },
+            "created": "2026-10-07T09:14:41.287-0400",
+            "status": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/6",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/closed.png",
+              "name": "Closed",
+              "id": "6",
+              "statusCategory": {
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
+                "id": 3,
+                "key": "done",
+                "colorName": "green",
+                "name": "Done"
+              }
+            }
+          }
+        },
+        {
+          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+          "id": "37388",
+          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37388",
+          "key": "CT-6934",
+          "fields": {
+            "issuetype": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10015",
+              "id": "10015",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+              "name": "Task",
+              "subtask": false,
+              "avatarId": 10318,
+              "hierarchyLevel": 0
+            },
+            "priority": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/priority/1",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/highest_new.svg",
+              "name": "Highest",
+              "id": "1"
+            },
+            "created": "2026-10-07T07:07:23.169-0400",
+            "status": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10005",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
+              "name": "Development",
+              "id": "10005",
+              "statusCategory": {
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/4",
+                "id": 4,
+                "key": "indeterminate",
+                "colorName": "yellow",
+                "name": "In Progress"
+              }
+            }
+          }
+        },
+        {
+          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+          "id": "37387",
+          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37387",
+          "key": "CT-6933",
+          "fields": {
+            "issuetype": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10015",
+              "id": "10015",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+              "name": "Task",
+              "subtask": false,
+              "avatarId": 10318,
+              "hierarchyLevel": 0
+            },
+            "priority": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/priority/1",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/highest_new.svg",
+              "name": "Highest",
+              "id": "1"
+            },
+            "created": "2026-10-07T07:04:58.962-0400",
+            "status": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10005",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
+              "name": "Development",
+              "id": "10005",
+              "statusCategory": {
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/4",
+                "id": 4,
+                "key": "indeterminate",
+                "colorName": "yellow",
+                "name": "In Progress"
+              }
+            }
+          }
+        },
+        {
+          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+          "id": "37386",
+          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37386",
+          "key": "CT-6932",
+          "fields": {
+            "issuetype": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10015",
+              "id": "10015",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+              "name": "Task",
+              "subtask": false,
+              "avatarId": 10318,
+              "hierarchyLevel": 0
+            },
+            "priority": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/priority/2",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/high_new.svg",
+              "name": "High",
+              "id": "2"
+            },
+            "created": "2026-10-06T16:59:52.392-0400",
+            "status": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/1",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/open.png",
+              "name": "Open",
+              "id": "1",
+              "statusCategory": {
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/2",
+                "id": 2,
+                "key": "new",
+                "colorName": "blue-gray",
+                "name": "To Do"
+              }
+            }
+          }
+        },
+        {
+          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+          "id": "37385",
+          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37385",
+          "key": "CT-6931",
+          "fields": {
+            "issuetype": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10015",
+              "id": "10015",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+              "name": "Task",
+              "subtask": false,
+              "avatarId": 10318,
+              "hierarchyLevel": 0
+            },
+            "priority": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/priority/2",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/high_new.svg",
+              "name": "High",
+              "id": "2"
+            },
+            "created": "2026-10-06T16:55:17.641-0400",
+            "status": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/1",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/open.png",
+              "name": "Open",
+              "id": "1",
+              "statusCategory": {
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/2",
+                "id": 2,
+                "key": "new",
+                "colorName": "blue-gray",
+                "name": "To Do"
+              }
+            }
+          }
+        },
+        {
+          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+          "id": "37384",
+          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37384",
+          "key": "CT-6930",
+          "fields": {
+            "issuetype": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10015",
+              "id": "10015",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+              "name": "Task",
+              "subtask": false,
+              "avatarId": 10318,
+              "hierarchyLevel": 0
+            },
+            "priority": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/priority/2",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/high_new.svg",
+              "name": "High",
+              "id": "2"
+            },
+            "created": "2026-10-06T16:49:02.657-0400",
+            "status": {
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/1",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/open.png",
+              "name": "Open",
+              "id": "1",
+              "statusCategory": {
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/2",
+                "id": 2,
+                "key": "new",
+                "colorName": "blue-gray",
+                "name": "To Do"
+              }
+            }
+          }
+        },
         {
           "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
           "id": "37383",
@@ -28,17 +496,17 @@
             },
             "created": "2026-10-06T13:47:36.800-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/1",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/6",
               "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/open.png",
-              "name": "Open",
-              "id": "1",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/closed.png",
+              "name": "Closed",
+              "id": "6",
               "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/2",
-                "id": 2,
-                "key": "new",
-                "colorName": "blue-gray",
-                "name": "To Do"
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
+                "id": 3,
+                "key": "done",
+                "colorName": "green",
+                "name": "Done"
               }
             }
           }
@@ -106,17 +574,17 @@
             },
             "created": "2026-10-06T10:00:37.771-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10004",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/6",
               "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
-              "name": "Dev Ready",
-              "id": "10004",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/closed.png",
+              "name": "Closed",
+              "id": "6",
               "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/4",
-                "id": 4,
-                "key": "indeterminate",
-                "colorName": "yellow",
-                "name": "In Progress"
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
+                "id": 3,
+                "key": "done",
+                "colorName": "green",
+                "name": "Done"
               }
             }
           }
@@ -145,11 +613,11 @@
             },
             "created": "2026-10-06T09:41:07.907-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10004",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10005",
               "description": "",
               "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
-              "name": "Dev Ready",
-              "id": "10004",
+              "name": "Development",
+              "id": "10005",
               "statusCategory": {
                 "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/4",
                 "id": 4,
@@ -339,17 +807,17 @@
             },
             "created": "2026-10-05T09:45:20.655-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10106",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10010",
               "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/",
-              "name": "Ready for Testing",
-              "id": "10106",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
+              "name": "Production Ready",
+              "id": "10010",
               "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/4",
-                "id": 4,
-                "key": "indeterminate",
-                "colorName": "yellow",
-                "name": "In Progress"
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
+                "id": 3,
+                "key": "done",
+                "colorName": "green",
+                "name": "Done"
               }
             }
           }
@@ -728,11 +1196,11 @@
             },
             "created": "2026-10-02T14:39:42.307-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10004",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10005",
               "description": "",
               "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
-              "name": "Dev Ready",
-              "id": "10004",
+              "name": "Development",
+              "id": "10005",
               "statusCategory": {
                 "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/4",
                 "id": 4,
@@ -3432,246 +3900,66 @@
               }
             }
           }
+        }
+      ],
+      "byStatus": {
+        "Open": 26,
+        "Development": 18,
+        "Closed": 31,
+        "Future": 3,
+        "Production Ready": 2,
+        "Dev Ready": 12,
+        "Sizing": 3,
+        "Discovery": 1,
+        "Story Development": 4
+      },
+      "byType": {
+        "Task": 49,
+        "DB Package Change": 8,
+        "Bug": 9,
+        "Data Defect": 4,
+        "Epic": 3,
+        "Story": 20,
+        "DB Non-Package Change": 1,
+        "Spike": 6
+      },
+      "byPriority": {
+        "Medium": 93,
+        "Highest": 2,
+        "High": 5
+      },
+      "bySprintCommitment": {},
+      "bySprint": {},
+      "bySprintBugs": {},
+      "bySprintCapacity": {},
+      "sprints": [],
+      "created": 100,
+      "resolved": 31,
+      "defects": 9,
+      "features": 75,
+      "bugsCreated": 9,
+      "bugsResolved": 1,
+      "agingByPhase": {
+        "Development": {
+          "count": 18,
+          "average": 3
         },
+        "Dev Ready": {
+          "count": 12,
+          "average": 6
+        }
+      },
+      "agingIssues": [],
+      "cycleTimeP85": 0.09581484953703703
+    },
+    "AMP": {
+      "total": 100,
+      "issues": [
         {
           "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
-          "id": "37170",
-          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37170",
-          "key": "CT-6841",
-          "fields": {
-            "issuetype": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10009",
-              "id": "10009",
-              "description": "This is used for Tasks, POC, Research, etc.",
-              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10313?size=medium",
-              "name": "Spike",
-              "subtask": false,
-              "avatarId": 10313,
-              "hierarchyLevel": 0
-            },
-            "priority": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
-              "name": "Medium",
-              "id": "3"
-            },
-            "created": "2026-09-24T17:55:50.991-0400",
-            "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/6",
-              "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/closed.png",
-              "name": "Closed",
-              "id": "6",
-              "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
-                "id": 3,
-                "key": "done",
-                "colorName": "green",
-                "name": "Done"
-              }
-            }
-          }
-        },
-        {
-          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
-          "id": "37169",
-          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37169",
-          "key": "CT-6840",
-          "fields": {
-            "issuetype": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10015",
-              "id": "10015",
-              "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
-              "name": "Task",
-              "subtask": false,
-              "avatarId": 10318,
-              "hierarchyLevel": 0
-            },
-            "priority": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
-              "name": "Medium",
-              "id": "3"
-            },
-            "created": "2026-09-24T13:22:25.312-0400",
-            "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/6",
-              "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/closed.png",
-              "name": "Closed",
-              "id": "6",
-              "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
-                "id": 3,
-                "key": "done",
-                "colorName": "green",
-                "name": "Done"
-              }
-            }
-          }
-        },
-        {
-          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
-          "id": "37163",
-          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37163",
-          "key": "CT-6839",
-          "fields": {
-            "issuetype": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10015",
-              "id": "10015",
-              "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
-              "name": "Task",
-              "subtask": false,
-              "avatarId": 10318,
-              "hierarchyLevel": 0
-            },
-            "priority": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
-              "name": "Medium",
-              "id": "3"
-            },
-            "created": "2026-09-24T10:52:39.545-0400",
-            "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/6",
-              "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/closed.png",
-              "name": "Closed",
-              "id": "6",
-              "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
-                "id": 3,
-                "key": "done",
-                "colorName": "green",
-                "name": "Done"
-              }
-            }
-          }
-        },
-        {
-          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
-          "id": "37162",
-          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37162",
-          "key": "CT-6838",
-          "fields": {
-            "issuetype": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10012",
-              "id": "10012",
-              "description": "This is used for Client Services to create a ticket for data that needs to be manually fixed by development.",
-              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
-              "name": "Data Defect",
-              "subtask": false,
-              "avatarId": 10318,
-              "hierarchyLevel": 0
-            },
-            "priority": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
-              "name": "Medium",
-              "id": "3"
-            },
-            "created": "2026-09-23T15:13:05.689-0400",
-            "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/6",
-              "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/closed.png",
-              "name": "Closed",
-              "id": "6",
-              "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
-                "id": 3,
-                "key": "done",
-                "colorName": "green",
-                "name": "Done"
-              }
-            }
-          }
-        },
-        {
-          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
-          "id": "37161",
-          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37161",
-          "key": "CT-6837",
-          "fields": {
-            "issuetype": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10021",
-              "id": "10021",
-              "description": "Used to create Package Database items as this has a different workflow than a non-package database change.",
-              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10300?size=medium",
-              "name": "DB Package Change",
-              "subtask": false,
-              "avatarId": 10300,
-              "hierarchyLevel": 0
-            },
-            "priority": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
-              "name": "Medium",
-              "id": "3"
-            },
-            "created": "2026-09-23T09:20:23.605-0400",
-            "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/6",
-              "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/closed.png",
-              "name": "Closed",
-              "id": "6",
-              "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
-                "id": 3,
-                "key": "done",
-                "colorName": "green",
-                "name": "Done"
-              }
-            }
-          }
-        },
-        {
-          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
-          "id": "37160",
-          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37160",
-          "key": "CT-6836",
-          "fields": {
-            "issuetype": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10021",
-              "id": "10021",
-              "description": "Used to create Package Database items as this has a different workflow than a non-package database change.",
-              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10300?size=medium",
-              "name": "DB Package Change",
-              "subtask": false,
-              "avatarId": 10300,
-              "hierarchyLevel": 0
-            },
-            "priority": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
-              "name": "Medium",
-              "id": "3"
-            },
-            "created": "2026-09-23T06:54:17.954-0400",
-            "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/6",
-              "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/closed.png",
-              "name": "Closed",
-              "id": "6",
-              "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
-                "id": 3,
-                "key": "done",
-                "colorName": "green",
-                "name": "Done"
-              }
-            }
-          }
-        },
-        {
-          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
-          "id": "37159",
-          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37159",
-          "key": "CT-6835",
+          "id": "37394",
+          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37394",
+          "key": "AMP-191",
           "fields": {
             "issuetype": {
               "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10006",
@@ -3689,7 +3977,7 @@
               "name": "Medium",
               "id": "3"
             },
-            "created": "2026-09-22T16:31:30.033-0400",
+            "created": "2026-10-07T12:35:42.582-0400",
             "status": {
               "self": "https://caretracker.atlassian.net/rest/api/3/status/1",
               "description": "",
@@ -3708,33 +3996,33 @@
         },
         {
           "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
-          "id": "37158",
-          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37158",
-          "key": "CT-6834",
+          "id": "37389",
+          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37389",
+          "key": "AMP-190",
           "fields": {
             "issuetype": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10006",
-              "id": "10006",
-              "description": "Stories track functionality or features expressed as user goals.",
-              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
-              "name": "Story",
+              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10015",
+              "id": "10015",
+              "description": "",
+              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+              "name": "Task",
               "subtask": false,
-              "avatarId": 10315,
+              "avatarId": 10318,
               "hierarchyLevel": 0
             },
             "priority": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/priority/2",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/high_new.svg",
-              "name": "High",
-              "id": "2"
+              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
+              "name": "Medium",
+              "id": "3"
             },
-            "created": "2026-09-22T15:06:24.058-0400",
+            "created": "2026-10-07T08:21:50.700-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10023",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10004",
               "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/",
-              "name": "Story Development",
-              "id": "10023",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
+              "name": "Dev Ready",
+              "id": "10004",
               "statusCategory": {
                 "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/4",
                 "id": 4,
@@ -3745,216 +4033,6 @@
             }
           }
         },
-        {
-          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
-          "id": "37157",
-          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37157",
-          "key": "CT-6833",
-          "fields": {
-            "issuetype": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10015",
-              "id": "10015",
-              "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
-              "name": "Task",
-              "subtask": false,
-              "avatarId": 10318,
-              "hierarchyLevel": 0
-            },
-            "priority": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
-              "name": "Medium",
-              "id": "3"
-            },
-            "created": "2026-09-22T14:32:37.586-0400",
-            "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/6",
-              "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/closed.png",
-              "name": "Closed",
-              "id": "6",
-              "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
-                "id": 3,
-                "key": "done",
-                "colorName": "green",
-                "name": "Done"
-              }
-            }
-          }
-        },
-        {
-          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
-          "id": "37156",
-          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37156",
-          "key": "CT-6832",
-          "fields": {
-            "issuetype": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10015",
-              "id": "10015",
-              "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
-              "name": "Task",
-              "subtask": false,
-              "avatarId": 10318,
-              "hierarchyLevel": 0
-            },
-            "priority": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
-              "name": "Medium",
-              "id": "3"
-            },
-            "created": "2026-09-22T14:31:12.607-0400",
-            "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/6",
-              "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/closed.png",
-              "name": "Closed",
-              "id": "6",
-              "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
-                "id": 3,
-                "key": "done",
-                "colorName": "green",
-                "name": "Done"
-              }
-            }
-          }
-        },
-        {
-          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
-          "id": "37155",
-          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37155",
-          "key": "CT-6831",
-          "fields": {
-            "issuetype": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10012",
-              "id": "10012",
-              "description": "This is used for Client Services to create a ticket for data that needs to be manually fixed by development.",
-              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
-              "name": "Data Defect",
-              "subtask": false,
-              "avatarId": 10318,
-              "hierarchyLevel": 0
-            },
-            "priority": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
-              "name": "Medium",
-              "id": "3"
-            },
-            "created": "2026-09-22T13:26:47.715-0400",
-            "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/6",
-              "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/closed.png",
-              "name": "Closed",
-              "id": "6",
-              "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
-                "id": 3,
-                "key": "done",
-                "colorName": "green",
-                "name": "Done"
-              }
-            }
-          }
-        },
-        {
-          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
-          "id": "37154",
-          "self": "https://caretracker.atlassian.net/rest/api/3/issue/37154",
-          "key": "CT-6830",
-          "fields": {
-            "issuetype": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10007",
-              "id": "10007",
-              "description": "This Issue type is used for database changes and has it's own workflow",
-              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10300?size=medium",
-              "name": "DB Non-Package Change",
-              "subtask": false,
-              "avatarId": 10300,
-              "hierarchyLevel": 0
-            },
-            "priority": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
-              "name": "Medium",
-              "id": "3"
-            },
-            "created": "2026-09-22T11:05:29.789-0400",
-            "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10010",
-              "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
-              "name": "Production Ready",
-              "id": "10010",
-              "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
-                "id": 3,
-                "key": "done",
-                "colorName": "green",
-                "name": "Done"
-              }
-            }
-          }
-        }
-      ],
-      "byStatus": {
-        "Open": 22,
-        "Development": 11,
-        "Dev Ready": 15,
-        "Closed": 37,
-        "Future": 3,
-        "Ready for Testing": 1,
-        "Production Ready": 2,
-        "Sizing": 3,
-        "Discovery": 1,
-        "Story Development": 5
-      },
-      "byType": {
-        "Task": 45,
-        "Data Defect": 6,
-        "Epic": 3,
-        "Bug": 8,
-        "Story": 22,
-        "DB Package Change": 7,
-        "DB Non-Package Change": 2,
-        "Spike": 7
-      },
-      "byPriority": {
-        "Medium": 97,
-        "High": 3
-      },
-      "bySprintCommitment": {},
-      "bySprint": {},
-      "bySprintBugs": {},
-      "bySprintCapacity": {},
-      "sprints": [],
-      "created": 100,
-      "resolved": 37,
-      "defects": 8,
-      "features": 74,
-      "bugsCreated": 8,
-      "bugsResolved": 1,
-      "agingByPhase": {
-        "Development": {
-          "count": 11,
-          "average": 3
-        },
-        "Dev Ready": {
-          "count": 15,
-          "average": 5
-        }
-      },
-      "agingIssues": [],
-      "cycleTimeP85": 0.03656392361111111
-    },
-    "AMP": {
-      "total": 100,
-      "issues": [
         {
           "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
           "id": "37381",
@@ -4603,17 +4681,17 @@
             },
             "created": "2026-10-03T13:28:00.602-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10106",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10010",
               "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/",
-              "name": "Ready for Testing",
-              "id": "10106",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
+              "name": "Production Ready",
+              "id": "10010",
               "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/4",
-                "id": 4,
-                "key": "indeterminate",
-                "colorName": "yellow",
-                "name": "In Progress"
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
+                "id": 3,
+                "key": "done",
+                "colorName": "green",
+                "name": "Done"
               }
             }
           }
@@ -6162,11 +6240,11 @@
             },
             "created": "2026-09-28T11:49:04.234-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10007",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10010",
               "description": "",
               "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
-              "name": "Release Ready",
-              "id": "10007",
+              "name": "Production Ready",
+              "id": "10010",
               "statusCategory": {
                 "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
                 "id": 3,
@@ -6201,11 +6279,11 @@
             },
             "created": "2026-09-28T11:20:36.052-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10007",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10010",
               "description": "",
               "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
-              "name": "Release Ready",
-              "id": "10007",
+              "name": "Production Ready",
+              "id": "10010",
               "statusCategory": {
                 "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
                 "id": 3,
@@ -6240,11 +6318,11 @@
             },
             "created": "2026-09-24T12:56:28.235-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10007",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10010",
               "description": "",
               "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
-              "name": "Release Ready",
-              "id": "10007",
+              "name": "Production Ready",
+              "id": "10010",
               "statusCategory": {
                 "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
                 "id": 3,
@@ -6279,11 +6357,11 @@
             },
             "created": "2026-09-17T15:30:22.841-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10007",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10010",
               "description": "",
               "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
-              "name": "Release Ready",
-              "id": "10007",
+              "name": "Production Ready",
+              "id": "10010",
               "statusCategory": {
                 "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
                 "id": 3,
@@ -6318,11 +6396,11 @@
             },
             "created": "2026-09-16T13:25:49.448-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10007",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10010",
               "description": "",
               "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
-              "name": "Release Ready",
-              "id": "10007",
+              "name": "Production Ready",
+              "id": "10010",
               "statusCategory": {
                 "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
                 "id": 3,
@@ -6708,17 +6786,17 @@
             },
             "created": "2026-09-11T13:36:45.907-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10106",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10010",
               "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/",
-              "name": "Ready for Testing",
-              "id": "10106",
+              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
+              "name": "Production Ready",
+              "id": "10010",
               "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/4",
-                "id": 4,
-                "key": "indeterminate",
-                "colorName": "yellow",
-                "name": "In Progress"
+                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
+                "id": 3,
+                "key": "done",
+                "colorName": "green",
+                "name": "Done"
               }
             }
           }
@@ -6864,11 +6942,11 @@
             },
             "created": "2026-09-08T14:18:00.816-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10007",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10010",
               "description": "",
               "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
-              "name": "Release Ready",
-              "id": "10007",
+              "name": "Production Ready",
+              "id": "10010",
               "statusCategory": {
                 "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
                 "id": 3,
@@ -7215,11 +7293,11 @@
             },
             "created": "2026-09-01T16:36:58.657-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10007",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10010",
               "description": "",
               "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
-              "name": "Release Ready",
-              "id": "10007",
+              "name": "Production Ready",
+              "id": "10010",
               "statusCategory": {
                 "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
                 "id": 3,
@@ -7410,11 +7488,11 @@
             },
             "created": "2026-08-25T12:23:29.080-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10007",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10010",
               "description": "",
               "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
-              "name": "Release Ready",
-              "id": "10007",
+              "name": "Production Ready",
+              "id": "10010",
               "statusCategory": {
                 "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
                 "id": 3,
@@ -7605,11 +7683,11 @@
             },
             "created": "2026-08-21T10:00:07.605-0400",
             "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/10007",
+              "self": "https://caretracker.atlassian.net/rest/api/3/status/10010",
               "description": "",
               "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/generic.png",
-              "name": "Release Ready",
-              "id": "10007",
+              "name": "Production Ready",
+              "id": "10010",
               "statusCategory": {
                 "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
                 "id": 3,
@@ -7774,100 +7852,22 @@
               }
             }
           }
-        },
-        {
-          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
-          "id": "36422",
-          "self": "https://caretracker.atlassian.net/rest/api/3/issue/36422",
-          "key": "AMP-89",
-          "fields": {
-            "issuetype": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10006",
-              "id": "10006",
-              "description": "Stories track functionality or features expressed as user goals.",
-              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
-              "name": "Story",
-              "subtask": false,
-              "avatarId": 10315,
-              "hierarchyLevel": 0
-            },
-            "priority": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
-              "name": "Medium",
-              "id": "3"
-            },
-            "created": "2026-08-13T16:32:55.085-0400",
-            "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/6",
-              "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/closed.png",
-              "name": "Closed",
-              "id": "6",
-              "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
-                "id": 3,
-                "key": "done",
-                "colorName": "green",
-                "name": "Done"
-              }
-            }
-          }
-        },
-        {
-          "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
-          "id": "36421",
-          "self": "https://caretracker.atlassian.net/rest/api/3/issue/36421",
-          "key": "AMP-88",
-          "fields": {
-            "issuetype": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/issuetype/10006",
-              "id": "10006",
-              "description": "Stories track functionality or features expressed as user goals.",
-              "iconUrl": "https://caretracker.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium",
-              "name": "Story",
-              "subtask": false,
-              "avatarId": 10315,
-              "hierarchyLevel": 0
-            },
-            "priority": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/priority/3",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/priorities/medium_new.svg",
-              "name": "Medium",
-              "id": "3"
-            },
-            "created": "2026-08-13T15:40:38.615-0400",
-            "status": {
-              "self": "https://caretracker.atlassian.net/rest/api/3/status/6",
-              "description": "",
-              "iconUrl": "https://caretracker.atlassian.net/images/icons/statuses/closed.png",
-              "name": "Closed",
-              "id": "6",
-              "statusCategory": {
-                "self": "https://caretracker.atlassian.net/rest/api/3/statuscategory/3",
-                "id": 3,
-                "key": "done",
-                "colorName": "green",
-                "name": "Done"
-              }
-            }
-          }
         }
       ],
       "byStatus": {
-        "Dev Ready": 2,
-        "Open": 26,
-        "Closed": 23,
-        "Ready for Testing": 2,
-        "Release Ready": 36,
+        "Open": 27,
+        "Dev Ready": 3,
+        "Closed": 21,
+        "Production Ready": 11,
+        "Release Ready": 27,
         "Story Development": 2,
         "Sizing": 7,
         "On Hold": 1,
         "Development": 1
       },
       "byType": {
-        "Task": 13,
-        "Story": 36,
+        "Story": 35,
+        "Task": 14,
         "Bug": 46,
         "Epic": 2,
         "Spike": 3
@@ -7884,23 +7884,23 @@
       "bySprintCapacity": {},
       "sprints": [],
       "created": 100,
-      "resolved": 23,
+      "resolved": 21,
       "defects": 46,
       "features": 52,
       "bugsCreated": 46,
       "bugsResolved": 8,
       "agingByPhase": {
         "Dev Ready": {
-          "count": 2,
-          "average": 18
+          "count": 3,
+          "average": 12
         },
         "Development": {
           "count": 1,
-          "average": 46
+          "average": 47
         }
       },
       "agingIssues": [],
-      "cycleTimeP85": 3.740709363425926
+      "cycleTimeP85": 3.744148425925926
     }
   },
   "epics": {
